@@ -7,11 +7,13 @@ public abstract class Node {
     protected NodeType nodeType;
     protected double output;
     protected Map<String, Integer> coordinates;
+    protected String nodeId;
 
-    public Node(NodeType nodeType, double output, Map<String, Integer> coordinates) {
+    public Node(NodeType nodeType, double output, Map<String, Integer> coordinates, String nodeId) {
         this.nodeType = nodeType;
         this.output = output;
         this.coordinates = coordinates;
+        this.nodeId = nodeId;
     }
 
     public NodeType getNodeType() {
@@ -47,7 +49,7 @@ public abstract class Node {
 
     @Override
     public String toString() {
-        return " (" + coordinates.get("x") + ", " + coordinates.get("y") + ") ";
+        return nodeId + "(" + coordinates.get("x") + ", " + coordinates.get("y") + ")";
     }
 
     protected abstract void execute();

@@ -7,8 +7,8 @@ import java.util.*;
 
 public class OutputNode extends Node {
     private List<Node> inputs;
-    public OutputNode(NodeType nodeType, double output, Map<String, Integer> coordinates) {
-        super(nodeType, output, coordinates);
+    public OutputNode(NodeType nodeType, double output, Map<String, Integer> coordinates, String nodeId) {
+        super(nodeType, output, coordinates, nodeId);
         this.inputs = new ArrayList<>();
     }
 

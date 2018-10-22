@@ -10,8 +10,8 @@ public class FunctionNode extends Node {
     private List<Node> inputs;
     private Operation operation;
 
-    public FunctionNode(NodeType nodeType, double output, Map<String, Integer> coordinates) {
-        super(nodeType, output, coordinates);
+    public FunctionNode(NodeType nodeType, double output, Map<String, Integer> coordinates, String nodeId) {
+        super(nodeType, output, coordinates, nodeId);
         Random r = new Random();
         int operationId  =r.nextInt((Operation.OPERATION_MAX - Operation.OPERATION_MIN) + 1) + Operation.OPERATION_MIN;
         switch (operationId) {

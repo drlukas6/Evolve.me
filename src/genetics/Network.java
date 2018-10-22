@@ -44,7 +44,7 @@ public class Network {
             Map<String, Integer> coordinates = new HashMap<>();
             coordinates.put("x", i);
             coordinates.put("y", 0);
-            inputNodes.add(new InputNode(NodeType.INPUT, randomOutput, coordinates));
+            inputNodes.add(new InputNode(NodeType.INPUT, randomOutput, coordinates, "i"));
         }
         System.out.println("========\tGenerated " + inputNodes.size() + " Input nodes\t\t========");
     }
@@ -59,10 +59,10 @@ public class Network {
                 Map<String, Integer> coordinates = new HashMap<>();
                 coordinates.put("x", i);
                 coordinates.put("y", j);
-                functionNodes.get(i).add(new FunctionNode(NodeType.FUNCTION, 0.0, coordinates));
+                functionNodes.get(i).add(new FunctionNode(NodeType.FUNCTION, 0.0, coordinates, "f"));
             }
         }
-        System.out.println("========\tGenerated " + numberOfNodes + " Function nodes\t\t========");
+        System.out.println("========\tGenerated " + numberOfNodes + " Function nodes\t========");
     }
 
     public void generateRandomOutputNodes() {
@@ -70,9 +70,9 @@ public class Network {
             Map<String, Integer> coordinates = new HashMap<>();
             coordinates.put("x", i);
             coordinates.put("y", numberOfColumns + 1);
-            outputNodes.add(new OutputNode(NodeType.OUTPUT, 0.0, coordinates));
+            outputNodes.add(new OutputNode(NodeType.OUTPUT, 0.0, coordinates, "o"));
         }
-        System.out.println("========\tGenerated " + outputNodes.size() + " Output nodes\t\t========");
+        System.out.println("========\tGenerated " + outputNodes.size() + " Output nodes\t========");
     }
 
     public void randomConnectNodes() {
