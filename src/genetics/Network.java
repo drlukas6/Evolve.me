@@ -21,15 +21,11 @@ public class Network {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.inputNodes = new ArrayList<>();
-
-//        Row
         this.functionNodes = new ArrayList<>();
-
         this.outputNodes = new ArrayList<>();
         this.numberOfInputs = numberOfInputs;
         this.numberOfOutputs = numberOfOutputs;
         this.levelsBack = levelsBack;
-
         this.r = new Random();
     }
 
