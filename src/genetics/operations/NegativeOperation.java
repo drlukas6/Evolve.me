@@ -11,7 +11,7 @@ public class NegativeOperation extends Operation{
     }
 
     @Override
-    protected double execute(Double... inputs) {
+    public double execute(Double... inputs) {
         return -inputs[0];
     }
 }

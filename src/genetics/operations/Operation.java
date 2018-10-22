@@ -17,7 +17,7 @@ public abstract class Operation {
         return operationArity;
     }
 
-    protected abstract double execute(Double...inputs);
+    public abstract double execute(Double...inputs);
 
 
     public static final int OPERATION_MAX = 4;

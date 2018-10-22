@@ -13,7 +13,17 @@ public class InputNode extends Node {
     }
 
     @Override
-    protected void execute() {
+    public void setActive(boolean active) {
+        this.active = active;
+//        System.out.println("Node " + this + " is active: " + this.active);
+    }
 
+    @Override
+    public boolean isActive() {
+        return false;
+    }
+
+    @Override
+    protected void execute() {
     }
 }

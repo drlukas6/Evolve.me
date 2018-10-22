@@ -11,7 +11,7 @@ public class MultiplyOperation extends Operation {
     }
 
     @Override
-    protected double execute(Double... inputs) {
+    public double execute(Double... inputs) {
         return inputs[0] * inputs[1];
     }
 }

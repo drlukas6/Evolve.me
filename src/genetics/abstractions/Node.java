@@ -8,6 +8,7 @@ public abstract class Node {
     protected double output;
     protected Map<String, Integer> coordinates;
     protected String nodeId;
+    protected boolean active;
 
     public Node(NodeType nodeType, double output, Map<String, Integer> coordinates, String nodeId) {
         this.nodeType = nodeType;
@@ -53,4 +54,6 @@ public abstract class Node {
     }
 
     protected abstract void execute();
+    public abstract void setActive(boolean active);
+    public abstract boolean isActive();
 }
