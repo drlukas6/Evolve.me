@@ -2,6 +2,7 @@ package genetics;
 
 import genetics.abstractions.Node;
 import genetics.abstractions.NodeType;
+import genetics.operations.*;
 
 import java.util.*;
 
@@ -14,6 +15,7 @@ public class Network {
     private int numberOfInputs;
     private int numberOfOutputs;
     private int levelsBack;
+    private Random r;
 
     public Network(int numberOfRows, int numberOfColumns, int numberOfInputs, int numberOfOutputs, int levelsBack) {
         this.numberOfRows = numberOfRows;
@@ -27,6 +29,8 @@ public class Network {
         this.numberOfInputs = numberOfInputs;
         this.numberOfOutputs = numberOfOutputs;
         this.levelsBack = levelsBack;
+
+        this.r = new Random();
     }
 
     public int getNumberOfRows() {
@@ -40,7 +44,6 @@ public class Network {
     public void generateRandomInputs() {
 //        As this is the first version of my network, inputs will be random double values
         for (int i = 0; i < numberOfInputs; i++) {
-            Random r = new Random();
             double randomOutput = r.nextDouble();
             Map<String, Integer> coordinates = new HashMap<>();
             coordinates.put("x", 0);
@@ -82,28 +85,9 @@ public class Network {
 
     public void randomConnectFunctionNodes() {
         System.out.println("================\tConnecting function nodes\t================");
-        Random r = new Random();
         for(List<FunctionNode> row: functionNodes) {
             for(FunctionNode node: row) {
-                int randomRow;
-                int randomColumn;
-                do {
-                    int maxColumn = node.getCoordinates().get("x") - 1;
-                    int minColumn = node.getCoordinates().get("x") - 1 - levelsBack;
-                  randomColumn = r.nextInt(maxColumn + 1 - minColumn) + minColumn;
-                    Node foundNode;
-                    if(randomColumn < 0) {
-                        randomRow = r.nextInt(inputNodes.size() - 1 + 1);
-                        foundNode = inputNodes.get(randomRow);
-                    }
-                    else {
-                        randomRow = r.nextInt(numberOfRows);
-                        foundNode = functionNodes.get(randomColumn).get(randomRow);
-                    }
-                    if(!node.getInputs().contains(foundNode) && node != foundNode) {
-                        node.getInputs().add(foundNode);
-                    }
-                } while(node.getInputs().size() < node.getOperation().getOperationArity());
+                mutateFunctionNodeInputs(node, false);
                 node.execute();
                 System.out.println("Connected node at " + node + " with operation: " + node.getOperation().getOperationId() + " to node(s): " + node.getInputs());
             }
@@ -111,17 +95,17 @@ public class Network {
     }
 
     public void randomConnectOutputNodes() {
-        Random r = new Random();
         System.out.println("================\tConnecting Output nodes\t\t================");
         for (OutputNode node: outputNodes) {
             int randomRow;
             int randomCol;
-            switch(r.nextInt(1 + 1)) {
+//            Choosing a random number between 0 and number of function nodes + number of input nodes to make connecting output nodes proportional
+            switch(r.nextInt((numberOfRows * numberOfColumns + numberOfInputs) + numberOfInputs)) {
                 case 0:
                     randomRow = r.nextInt(numberOfInputs);
                     node.setInput(inputNodes.get(randomRow));
                     break;
-                case 1:
+                default:
                     randomRow = r.nextInt(numberOfRows);
                     randomCol = r.nextInt(numberOfColumns);
                     node.setInput(functionNodes.get(randomCol).get(randomRow));
@@ -152,37 +136,111 @@ public class Network {
     }
 
     private void singlePointMutation() {
-        Random r = new Random();
+        System.out.println("================\tSingle point mutation\t\t================");
         boolean isChangedActive = false;
         do {
-            int randomColumn;
-            int randomRow;
-//            1 => Output Node ; 0 => Function Node
-            switch (r.nextInt(1 + 1)) {
+            if(r.nextInt((numberOfColumns * numberOfRows + numberOfOutputs) + 1) > numberOfRows*numberOfColumns) {
+                isChangedActive = mutateRandomOutputNode();
+            }
+            else {
+                isChangedActive = mutateRandomFunctionNode();
+            }
+        } while(!isChangedActive);
+        System.out.println("Single point mutation completed");
+    }
+
+    private boolean mutateRandomFunctionNode() {
+        int randomColumn = r.nextInt(numberOfColumns);
+        int randomRow = r.nextInt(numberOfRows);
+        FunctionNode node = functionNodes.get(randomColumn).get(randomRow);
+        switch (r.nextInt( 1 + 1)) {
+            case 0:
+                return mutateFunctionNodeInputs(node, true);
+            default:
+                return mutateFunctionNodeOperation(node);
+        }
+    }
+
+    private boolean mutateFunctionNodeInputs(FunctionNode node, boolean shouldOutput) {
+        int randomRow;
+        int randomColumn;
+        node.getInputs().clear();
+        do {
+            int maxColumn = getMaxColumn(node);
+            int minColumn = getMinColumn(node);
+            randomColumn = r.nextInt(maxColumn + 1 - minColumn) + minColumn;
+            Node foundNode;
+            if(randomColumn < 0) {
+                randomRow = r.nextInt(inputNodes.size() - 1 + 1);
+                foundNode = inputNodes.get(randomRow);
+            }
+            else {
+                randomRow = r.nextInt(numberOfRows);
+                foundNode = functionNodes.get(randomColumn).get(randomRow);
+            }
+            if(!node.getInputs().contains(foundNode) && node != foundNode) {
+                node.getInputs().add(foundNode);
+            }
+        } while(node.getInputs().size() < node.getOperation().getOperationArity());
+        if(shouldOutput) {
+            System.out.println("Changing Function node " + node + "; NEW CONNECTION(S): " + node.getInputs());
+        }
+        return node.isActive();
+    }
+
+    private boolean mutateFunctionNodeOperation(FunctionNode node) {
+        int oprationId;
+        boolean foundTargetArity = false;
+        do {
+            oprationId = r.nextInt(Operation.OPERATION_MAX + 1 - Operation.OPERATION_MIN) + Operation.OPERATION_MIN;
+            Operation randomOperation = new AddOperation();
+            switch (oprationId) {
                 case 0:
-                    int randomOutputNode = r.nextInt(numberOfOutputs + 1);
-                    randomColumn = r.nextInt(numberOfColumns + 1 - (numberOfColumns - levelsBack)) + (numberOfColumns - levelsBack);
-                    randomRow = r.nextInt(numberOfRows + 1);
-                    OutputNode toChange = outputNodes.get(randomOutputNode)
-                    toChange.setInput(functionNodes.get(randomColumn).get(randomRow));
-                    isChangedActive = toChange.isActive();
-                    System.out.println("Changing output node " + toChange + "; NEW CONNECTION: " + toChange.getInput());
+                    randomOperation = new AddOperation();
                     break;
                 case 1:
-//                  1 => Function, 0 => Connection
-                    int changeType = r.nextInt(1 + 1);
-                    switch(changeType) {
-                        case 0:
-                            break;
-                        case 1:
-                            break;
-                    }
+                    randomOperation = new SubstractOperation();
+                    break;
+                case 2:
+                    randomOperation = new MultiplyOperation();
+                    break;
+                case 3:
+                    randomOperation = new DivideOperation();
+                    break;
+                case 4:
+                    randomOperation = new NegativeOperation();
+                    break;
+                case 5:
+                    randomOperation = new SinOperation();
                     break;
             }
+            if(randomOperation.getOperationArity() == node.getOperation().getOperationArity() && randomOperation.getOperationId() != node.getOperation().getOperationId()) {
+                node.setOperation(randomOperation);
+                foundTargetArity = true;
+            }
+        } while (!foundTargetArity);
+        System.out.println("Changing Function node " + node + "; NEW OPERATION: " + node.getOperation().getOperationId());
+        return node.isActive();
+    }
 
-            int mutationType = r.nextInt(1 + 1);
-            int nodeType = r.nextInt(1 + 1);
-        } while(!isChangedActive);
+    private boolean mutateRandomOutputNode() {
+        int randomOutputNode = r.nextInt(numberOfOutputs + 1);
+        int maxColumn = numberOfColumns - 1;
+        int minColumn = maxColumn - levelsBack;
+        int randomColumn = r.nextInt(maxColumn + 1 - minColumn) + minColumn;
+        int randomRow = r.nextInt(numberOfRows + 1);
+        OutputNode node = outputNodes.get(randomOutputNode);
+        node.setInput(functionNodes.get(randomColumn).get(randomRow));
+        System.out.println("Changing output node " + node + "; NEW CONNECTION: " + node.getInput());
+        return node.isActive();
+    }
+
+    private int getMinColumn(Node from) {
+        return from.getCoordinates().get("x") - 1 - levelsBack;
+    }
+
+    private int getMaxColumn(Node from) {
+        return from.getCoordinates().get("x") - 1;
     }
 
 
@@ -193,5 +251,6 @@ public class Network {
         randomConnectFunctionNodes();
         randomConnectOutputNodes();
         checkActiveNodes();
+        singlePointMutation();
     }
 }

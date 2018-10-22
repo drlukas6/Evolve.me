@@ -31,6 +31,9 @@ public class FunctionNode extends Node {
             case 4:
                 this.operation = new NegativeOperation();
                 break;
+            case 5:
+                this.operation = new SinOperation();
+                break;
         }
         this.inputs = new ArrayList<>();
     }
@@ -54,6 +57,10 @@ public class FunctionNode extends Node {
 
     public Operation getOperation() {
         return operation;
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     @Override
