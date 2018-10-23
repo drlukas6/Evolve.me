@@ -3,30 +3,44 @@ package genetics;
 import genetics.abstractions.Node;
 import genetics.abstractions.NodeType;
 import genetics.operations.*;
+import jdk.internal.util.xml.impl.Input;
 
 import java.util.*;
 
 public class Network {
-    private List<InputNode> inputNodes;
-    private List<List<FunctionNode>> functionNodes;
-    private List<OutputNode> outputNodes;
+    private List<InputNode> inputNodes = new ArrayList<>();
+    private List<List<FunctionNode>> functionNodes = new ArrayList<>();
+    private List<OutputNode> outputNodes = new ArrayList<>();
     private int numberOfRows;
     private int numberOfColumns;
     private int numberOfInputs;
     private int numberOfOutputs;
     private int levelsBack;
-    private Random r;
+    private Random r = new Random();
+    private List<Double> outputValues;
+    private List<Double> inputValues;
+    private int generation = 0;
+    private int passThrough = 0;
+    private List<Double> calculatedOutputs = new ArrayList<>();
 
     public Network(int numberOfRows, int numberOfColumns, int numberOfInputs, int numberOfOutputs, int levelsBack) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
-        this.inputNodes = new ArrayList<>();
-        this.functionNodes = new ArrayList<>();
-        this.outputNodes = new ArrayList<>();
         this.numberOfInputs = numberOfInputs;
         this.numberOfOutputs = numberOfOutputs;
         this.levelsBack = levelsBack;
-        this.r = new Random();
+    }
+
+    public Network(int numberOfRows, int numberOfColumns, int numberOfInputs,
+                   int numberOfOutputs, int levelsBack,
+                   List<Double> outputValues, List<Double> inputValues) {
+        this.numberOfRows = numberOfRows;
+        this.numberOfColumns = numberOfColumns;
+        this.numberOfInputs = numberOfInputs;
+        this.numberOfOutputs = numberOfOutputs;
+        this.levelsBack = levelsBack;
+        this.outputValues = outputValues;
+        this.inputValues = inputValues;
     }
 
     public int getNumberOfRows() {
@@ -37,20 +51,34 @@ public class Network {
         return numberOfColumns;
     }
 
-    public void generateRandomInputs() {
-//        As this is the first version of my network, inputs will be random double values
-        for (int i = 0; i < numberOfInputs; i++) {
-            double randomOutput = r.nextDouble();
+    private void generateInputNodes() {
+        for(int i = 0; i < numberOfInputs; i++) {
             Map<String, Integer> coordinates = new HashMap<>();
             coordinates.put("x", 0);
             coordinates.put("y", i);
-            inputNodes.add(new InputNode(NodeType.INPUT, randomOutput, coordinates, "i"));
+            InputNode node = new InputNode(NodeType.INPUT, 0.0, coordinates, "i");
+            inputNodes.add(node);
         }
         System.out.println("================\tGenerated " + inputNodes.size() + " Input nodes\t\t================");
         System.out.println(inputNodes);
     }
 
-    public void generateRandomFunctionNodes() {
+    private void populateInputNodes(boolean isRandom) {
+        inputNodes.stream().forEach(node -> {
+            populateInputNode(isRandom, node);
+        });
+    }
+
+    private void populateInputNode(boolean isRandom, Node inputNode) {
+        if(isRandom) {
+            inputNode.setOutput(r.nextDouble());
+        }
+        else {
+            inputNode.setOutput(inputValues.get(passThrough));
+        }
+    }
+
+    private void generateRandomFunctionNodes() {
         int numberOfNodes = 0;
         for (int i = 0; i < numberOfColumns; i++) {
 //            Creating columns
@@ -67,7 +95,7 @@ public class Network {
         System.out.println(functionNodes);
     }
 
-    public void generateRandomOutputNodes() {
+    private void generateRandomOutputNodes() {
         for (int i = 0; i < numberOfOutputs; i++) {
             Map<String, Integer> coordinates = new HashMap<>();
             coordinates.put("x", 0);
@@ -79,36 +107,52 @@ public class Network {
     }
 
 
-    public void randomConnectFunctionNodes() {
+    private void randomConnectFunctionNodes() {
         System.out.println("================\tConnecting function nodes\t================");
-        for(List<FunctionNode> row: functionNodes) {
-            for(FunctionNode node: row) {
+        for(List<FunctionNode> col: functionNodes) {
+            for(FunctionNode node: col) {
                 mutateFunctionNodeInputs(node, false);
-                node.execute();
+//                node.execute();
                 System.out.println("Connected node at " + node + " with operation: " + node.getOperation().getOperationId() + " to node(s): " + node.getInputs());
             }
         }
     }
 
-    public void randomConnectOutputNodes() {
+    private void randomConnectOutputNodes() {
         System.out.println("================\tConnecting Output nodes\t\t================");
         for (OutputNode node: outputNodes) {
             int randomRow;
             int randomCol;
+            int numberOfFunctionNodes = numberOfRows * numberOfColumns;
 //            Choosing a random number between 0 and number of function nodes + number of input nodes to make connecting output nodes proportional
-            switch(r.nextInt((numberOfRows * numberOfColumns + numberOfInputs) + numberOfInputs)) {
-                case 0:
-                    randomRow = r.nextInt(numberOfInputs);
-                    node.setInput(inputNodes.get(randomRow));
-                    break;
-                default:
-                    randomRow = r.nextInt(numberOfRows);
-                    randomCol = r.nextInt(numberOfColumns);
-                    node.setInput(functionNodes.get(randomCol).get(randomRow));
-                    break;
-            }
-            node.execute();
+//            if(r.nextInt((numberOfFunctionNodes + numberOfInputs) + numberOfInputs) > numberOfFunctionNodes) {
+//                randomRow = r.nextInt(numberOfInputs);
+//                node.setInput(inputNodes.get(randomRow));
+//            }
+//            else {
+//                randomRow = r.nextInt(numberOfRows);
+//                randomCol = r.nextInt(numberOfColumns);
+//                node.setInput(functionNodes.get(randomCol).get(randomRow));
+//            }
+            randomRow = r.nextInt(numberOfRows);
+            randomCol = r.nextInt(numberOfColumns);
+            node.setInput(functionNodes.get(randomCol).get(randomRow));
+//            node.execute();
             System.out.println("Connected output node at " + node + " to node: " + node.getInput());
+        }
+    }
+
+    private void executeFunctionNodes() {
+        for(List<FunctionNode> col: functionNodes) {
+            for(FunctionNode node: col) {
+                node.execute();
+            }
+        }
+    }
+
+    private void executeOutputNodes() {
+        for(OutputNode node: outputNodes) {
+            node.execute();
         }
     }
 
@@ -220,11 +264,11 @@ public class Network {
     }
 
     private boolean mutateRandomOutputNode() {
-        int randomOutputNode = r.nextInt(numberOfOutputs + 1);
+        int randomOutputNode = r.nextInt(numberOfOutputs);
         int maxColumn = numberOfColumns - 1;
         int minColumn = maxColumn - levelsBack;
         int randomColumn = r.nextInt(maxColumn + 1 - minColumn) + minColumn;
-        int randomRow = r.nextInt(numberOfRows + 1);
+        int randomRow = r.nextInt(numberOfRows);
         OutputNode node = outputNodes.get(randomOutputNode);
         node.setInput(functionNodes.get(randomColumn).get(randomRow));
         System.out.println("Changing output node " + node + "; NEW CONNECTION: " + node.getInput());
@@ -239,14 +283,42 @@ public class Network {
         return from.getCoordinates().get("x") - 1;
     }
 
+    private double calculateFitness() {
+        double sum = 0.0;
+        for(int i = 0; i < outputValues.size(); i++) {
+            sum += Math.pow((outputValues.get(i) - calculatedOutputs.get(i)), 2);
+        }
+        return Math.sqrt(sum / (outputValues.size() - 2));
+    }
 
-    public void initialSetup() {
-        generateRandomInputs();
+    private void completeEpoch() {
+        while(passThrough < inputValues.size()) {
+            
+            ++passThrough;
+        }
+    }
+
+
+    public void randomInitialSetup() {
+        generateInputNodes();
+        populateInputNodes(true);
         generateRandomFunctionNodes();
         generateRandomOutputNodes();
         randomConnectFunctionNodes();
         randomConnectOutputNodes();
+        executeFunctionNodes();
+        executeOutputNodes();
         checkActiveNodes();
         singlePointMutation();
+    }
+
+
+    public void executeNetwork() {
+        generateInputNodes();
+        generateRandomFunctionNodes();
+        randomConnectFunctionNodes();
+        generateRandomOutputNodes();
+        randomConnectOutputNodes();
+        populateInputNodes(false);
     }
 }
