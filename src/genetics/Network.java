@@ -21,6 +21,7 @@ public class Network {
     private List<Double> inputValues;
     private int generation = 0;
     private int passThrough = 0;
+    private double fitness = 999.9;
     private List<Double> calculatedOutputs = new ArrayList<>();
 
     public Network(int numberOfRows, int numberOfColumns, int numberOfInputs, int numberOfOutputs, int levelsBack) {
@@ -211,14 +212,14 @@ public class Network {
             randomColumn = r.nextInt(maxColumn + 1 - minColumn) + minColumn;
             Node foundNode;
             if(randomColumn < 0) {
-                randomRow = r.nextInt(inputNodes.size() - 1 + 1);
+                randomRow = r.nextInt(inputNodes.size());
                 foundNode = inputNodes.get(randomRow);
             }
             else {
                 randomRow = r.nextInt(numberOfRows);
                 foundNode = functionNodes.get(randomColumn).get(randomRow);
             }
-            if(!node.getInputs().contains(foundNode) && node != foundNode) {
+            if(node != foundNode) {
                 node.getInputs().add(foundNode);
             }
         } while(node.getInputs().size() < node.getOperation().getOperationArity());
@@ -283,17 +284,22 @@ public class Network {
         return from.getCoordinates().get("x") - 1;
     }
 
-    private double calculateFitness() {
+    private void calculateFitness() {
         double sum = 0.0;
         for(int i = 0; i < outputValues.size(); i++) {
             sum += Math.pow((outputValues.get(i) - calculatedOutputs.get(i)), 2);
         }
-        return Math.sqrt(sum / (outputValues.size() - 2));
+        fitness =  Math.sqrt(sum / (outputValues.size() - 2));
+        System.out.println("================\tFitness calculation\t\t================");
+        System.out.println("FITNESS: " + fitness);
     }
 
     private void completeEpoch() {
         while(passThrough < inputValues.size()) {
-            
+            populateInputNodes(false);
+            executeFunctionNodes();
+            executeOutputNodes();
+            calculatedOutputs.add(outputNodes.get(0).getOutput());
             ++passThrough;
         }
     }
@@ -319,6 +325,8 @@ public class Network {
         randomConnectFunctionNodes();
         generateRandomOutputNodes();
         randomConnectOutputNodes();
-        populateInputNodes(false);
+        checkActiveNodes();
+        completeEpoch();
+        calculateFitness();
     }
 }
