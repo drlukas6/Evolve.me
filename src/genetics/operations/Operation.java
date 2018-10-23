@@ -20,7 +20,7 @@ public abstract class Operation {
     public abstract double execute(Double...inputs);
 
 
-    public static final int OPERATION_MAX = 5;
+    public static final int OPERATION_MAX = 8;
     public static final int OPERATION_MIN = 0;
 
     public enum OperationId {
@@ -29,7 +29,10 @@ public abstract class Operation {
         MULTIPLICATION(2),
         DIVISION(3),
         NEGATIVE(4),
-        SIN(5);
+        SIN(5),
+        COS(6),
+        SQUARE(7),
+        LOG10(8);
 
         private int id;
 

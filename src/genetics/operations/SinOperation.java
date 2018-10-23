@@ -11,6 +11,6 @@ public class SinOperation extends Operation {
 
     @Override
     public double execute(Double... inputs) {
-        return Math.toDegrees(Math.sin(inputs[0]));
+        return (Math.sin(Math.toDegrees(inputs[0])));
     }
 }

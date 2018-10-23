@@ -234,27 +234,7 @@ public class Network {
         boolean foundTargetArity = false;
         do {
             oprationId = r.nextInt(Operation.OPERATION_MAX + 1 - Operation.OPERATION_MIN) + Operation.OPERATION_MIN;
-            Operation randomOperation = new AddOperation();
-            switch (oprationId) {
-                case 0:
-                    randomOperation = new AddOperation();
-                    break;
-                case 1:
-                    randomOperation = new SubstractOperation();
-                    break;
-                case 2:
-                    randomOperation = new MultiplyOperation();
-                    break;
-                case 3:
-                    randomOperation = new DivideOperation();
-                    break;
-                case 4:
-                    randomOperation = new NegativeOperation();
-                    break;
-                case 5:
-                    randomOperation = new SinOperation();
-                    break;
-            }
+            Operation randomOperation = OperationFactory.getOperationWithId(oprationId);
             if(randomOperation.getOperationArity() == node.getOperation().getOperationArity() && randomOperation.getOperationId() != node.getOperation().getOperationId()) {
                 node.setOperation(randomOperation);
                 foundTargetArity = true;

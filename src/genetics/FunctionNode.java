@@ -14,27 +14,7 @@ public class FunctionNode extends Node {
     public FunctionNode(NodeType nodeType, double output, Map<String, Integer> coordinates, String nodeId) {
         super(nodeType, output, coordinates, nodeId);
         Random r = new Random();
-        int operationId  =r.nextInt((Operation.OPERATION_MAX - Operation.OPERATION_MIN) + 1) + Operation.OPERATION_MIN;
-        switch (operationId) {
-            case 0:
-                this.operation = new AddOperation();
-                break;
-            case 1:
-                this.operation = new SubstractOperation();
-                break;
-            case 2:
-                this.operation = new MultiplyOperation();
-                break;
-            case 3:
-                this.operation = new DivideOperation();
-                break;
-            case 4:
-                this.operation = new NegativeOperation();
-                break;
-            case 5:
-                this.operation = new SinOperation();
-                break;
-        }
+        this.operation = OperationFactory.getRandomOperation();
         this.inputs = new ArrayList<>();
     }
 
