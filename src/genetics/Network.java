@@ -3,7 +3,6 @@ package genetics;
 import genetics.abstractions.Node;
 import genetics.abstractions.NodeType;
 import genetics.operations.*;
-import jdk.internal.util.xml.impl.Input;
 
 import java.util.*;
 
@@ -24,7 +23,8 @@ public class Network {
     private double fitness = 999.9;
     private List<Double> calculatedOutputs = new ArrayList<>();
 
-    public Network(int numberOfRows, int numberOfColumns, int numberOfInputs, int numberOfOutputs, int levelsBack) {
+    public Network(int numberOfRows, int numberOfColumns, int numberOfInputs,
+                   int numberOfOutputs, int levelsBack) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.numberOfInputs = numberOfInputs;
@@ -44,14 +44,6 @@ public class Network {
         this.inputValues = inputValues;
     }
 
-    public int getNumberOfRows() {
-        return numberOfRows;
-    }
-
-    public int getNumberOfColumns() {
-        return numberOfColumns;
-    }
-
     private void generateInputNodes() {
         for(int i = 0; i < numberOfInputs; i++) {
             Map<String, Integer> coordinates = new HashMap<>();
@@ -60,7 +52,7 @@ public class Network {
             InputNode node = new InputNode(NodeType.INPUT, 0.0, coordinates, "i");
             inputNodes.add(node);
         }
-        System.out.println("================\tGenerated " + inputNodes.size() + " Input nodes\t\t================");
+        System.out.println("========================\tGenerated " + inputNodes.size() + " Input nodes\t\t========================");
         System.out.println(inputNodes);
     }
 
@@ -82,7 +74,6 @@ public class Network {
     private void generateRandomFunctionNodes() {
         int numberOfNodes = 0;
         for (int i = 0; i < numberOfColumns; i++) {
-//            Creating columns
             functionNodes.add(new ArrayList<>());
             for (int j = 0; j < numberOfRows; j++) {
                 numberOfNodes++;
@@ -92,7 +83,7 @@ public class Network {
                 functionNodes.get(i).add(new FunctionNode(NodeType.FUNCTION, 0.0, coordinates, "f"));
             }
         }
-        System.out.println("================\tGenerated " + numberOfNodes + " Function nodes\t================");
+        System.out.println("========================\tGenerated " + numberOfNodes + " Function nodes\t========================");
         System.out.println(functionNodes);
     }
 
@@ -103,13 +94,13 @@ public class Network {
             coordinates.put("y", i);
             outputNodes.add(new OutputNode(NodeType.OUTPUT, 0.0, coordinates, "o"));
         }
-        System.out.println("================\tGenerated " + outputNodes.size() + " Output nodes\t================");
+        System.out.println("========================\tGenerated " + outputNodes.size() + " Output nodes\t========================");
         System.out.println(outputNodes);
     }
 
 
     private void randomConnectFunctionNodes() {
-        System.out.println("================\tConnecting function nodes\t================");
+        System.out.println("========================\tConnecting function nodes\t========================");
         for(List<FunctionNode> col: functionNodes) {
             for(FunctionNode node: col) {
                 mutateFunctionNodeInputs(node, false);
@@ -120,7 +111,7 @@ public class Network {
     }
 
     private void randomConnectOutputNodes() {
-        System.out.println("================\tConnecting Output nodes\t\t================");
+        System.out.println("========================\tConnecting Output nodes\t\t========================");
         for (OutputNode node: outputNodes) {
             int randomRow;
             int randomCol;
@@ -158,7 +149,7 @@ public class Network {
     }
 
     private void checkActiveNodes() {
-        System.out.println("================\tMarking selected nodes\t\t================");
+        System.out.println("========================\tMarking selected nodes\t\t========================");
         for(List<FunctionNode> nodeCol: functionNodes) {
             for(FunctionNode node: nodeCol) {
                 node.setActive(false);
@@ -177,7 +168,7 @@ public class Network {
     }
 
     private void singlePointMutation() {
-        System.out.println("================\tSingle point mutation\t\t================");
+        System.out.println("========================\tSingle point mutation\t\t========================");
         boolean isChangedActive = false;
         do {
             if(r.nextInt((numberOfColumns * numberOfRows + numberOfOutputs) + 1) > numberOfRows*numberOfColumns) {
@@ -256,12 +247,12 @@ public class Network {
         return node.isActive();
     }
 
-    private int getMinColumn(Node from) {
-        return from.getCoordinates().get("x") - 1 - levelsBack;
+    private int getMinColumn(Node node) {
+        return node.getCoordinates().get("x") - 1 - levelsBack;
     }
 
-    private int getMaxColumn(Node from) {
-        return from.getCoordinates().get("x") - 1;
+    private int getMaxColumn(Node node) {
+        return node.getCoordinates().get("x") - 1;
     }
 
     private void calculateFitness() {
@@ -270,7 +261,7 @@ public class Network {
             sum += Math.pow((outputValues.get(i) - calculatedOutputs.get(i)), 2);
         }
         fitness =  Math.sqrt(sum / (outputValues.size() - 2));
-        System.out.println("================\tFitness calculation\t\t================");
+        System.out.println("========================\tFitness calculation\t\t\t========================");
         System.out.println("FITNESS: " + fitness);
     }
 

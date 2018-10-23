@@ -16,7 +16,7 @@ public class Main {
         outputs.add(3.);
         outputs.add(3.15);
 //        Network network = new Network(3, 3, 3, 1, 1);
-        Network network = new Network(9, 9, 1, 1, 2, outputs, inputs);
+        Network network = new Network(3, 3, 1, 1, 2, outputs, inputs);
         network.executeNetwork();
     }
 }
