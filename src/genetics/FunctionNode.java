@@ -54,4 +54,9 @@ public class FunctionNode extends Node {
                 break;
         }
     }
+
+    @Override
+    public String toString() {
+        return nodeId + operation.getOperationId() + "(" + coordinates.get("x") + ", " + coordinates.get("y") + ")";
+    }
 }

@@ -104,8 +104,7 @@ public class Network {
         for(List<FunctionNode> col: functionNodes) {
             for(FunctionNode node: col) {
                 mutateFunctionNodeInputs(node, false);
-//                node.execute();
-                System.out.println("Connected node at " + node + " with operation: " + node.getOperation().getOperationId() + " to node(s): " + node.getInputs());
+                System.out.println("Connected node " + node + " to node(s): " + node.getInputs());
             }
         }
     }
@@ -116,20 +115,9 @@ public class Network {
             int randomRow;
             int randomCol;
             int numberOfFunctionNodes = numberOfRows * numberOfColumns;
-//            Choosing a random number between 0 and number of function nodes + number of input nodes to make connecting output nodes proportional
-//            if(r.nextInt((numberOfFunctionNodes + numberOfInputs) + numberOfInputs) > numberOfFunctionNodes) {
-//                randomRow = r.nextInt(numberOfInputs);
-//                node.setInput(inputNodes.get(randomRow));
-//            }
-//            else {
-//                randomRow = r.nextInt(numberOfRows);
-//                randomCol = r.nextInt(numberOfColumns);
-//                node.setInput(functionNodes.get(randomCol).get(randomRow));
-//            }
             randomRow = r.nextInt(numberOfRows);
             randomCol = r.nextInt(numberOfColumns);
             node.setInput(functionNodes.get(randomCol).get(randomRow));
-//            node.execute();
             System.out.println("Connected output node at " + node + " to node: " + node.getInput());
         }
     }
@@ -289,6 +277,23 @@ public class Network {
         singlePointMutation();
     }
 
+    public String getNetworkDescriptor() {
+        String descriptor = new String();
+        for(InputNode node: inputNodes) {
+            descriptor += node + " ";
+        }
+        descriptor += "| ";
+        for(List<FunctionNode> col: functionNodes) {
+            for(FunctionNode node: col) {
+                descriptor += node + node.getInputs().toString() + " ";
+            }
+        }
+        descriptor += "| ";
+        for(OutputNode node: outputNodes) {
+            descriptor += node + node.getInput().toString() + " ";
+        }
+        return descriptor;
+    }
 
     public void executeNetwork() {
         generateInputNodes();
@@ -299,5 +304,9 @@ public class Network {
         checkActiveNodes();
         completeEpoch();
         calculateFitness();
+        System.out.println(getNetworkDescriptor());
+
     }
+
+
 }
