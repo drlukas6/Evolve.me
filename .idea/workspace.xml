@@ -4,7 +4,9 @@
     <list default="true" id="e4cb8977-6627-433e-8a02-15088cdc77e4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/genetics/FunctionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/FunctionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/genetics/InputNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/InputNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/genetics/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/Network.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/genetics/abstractions/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/abstractions/Node.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,22 +30,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="74" />
+          <entry key="java" value="76" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="74" />
+          <entry key="JAVA" value="76" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="14379" />
+          <entry key="java" value="15249" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="14379" />
+          <entry key="JAVA" value="15249" />
         </counts>
       </usages-collector>
     </session>
@@ -53,8 +55,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/genetics/Network.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="106" selection-start-line="106" selection-end-line="106" />
+            <state relative-caret-position="296">
+              <caret line="310" column="68" lean-forward="true" selection-start-line="310" selection-start-column="68" selection-end-line="310" selection-end-column="68" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/genetics/InputNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="23" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -65,20 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/genetics/FunctionNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/genetics/abstractions/Node.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="52" column="86" lean-forward="true" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="86" />
+            <state relative-caret-position="285">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -129,9 +131,7 @@
         <option value="$PROJECT_DIR$/src/genetics/operations/MultiplyOperation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/NegativeOperation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/SubstractOperation.java" />
-        <option value="$PROJECT_DIR$/src/genetics/abstractions/Node.java" />
         <option value="$PROJECT_DIR$/src/genetics/OutputNode.java" />
-        <option value="$PROJECT_DIR$/src/genetics/InputNode.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/SinOperation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/CosOperation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/SquareOperation.java" />
@@ -139,7 +139,9 @@
         <option value="$PROJECT_DIR$/src/genetics/operations/Operation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/OperationFactory.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/genetics/abstractions/Node.java" />
         <option value="$PROJECT_DIR$/src/genetics/FunctionNode.java" />
+        <option value="$PROJECT_DIR$/src/genetics/InputNode.java" />
         <option value="$PROJECT_DIR$/src/genetics/Network.java" />
       </list>
     </option>
@@ -196,7 +198,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540379737094" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540385361526" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -242,12 +244,12 @@
       <workItem from="1540282888485" duration="233000" />
       <workItem from="1540293361380" duration="10896000" />
       <workItem from="1540367731040" duration="891000" />
-      <workItem from="1540378452369" duration="1029000" />
+      <workItem from="1540378452369" duration="3425000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42612000" />
+    <option name="totallyTimeSpent" value="45008000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -367,18 +369,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/InputNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#496#497#0" expanded="true" />
-            <element signature="e#524#525#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/genetics/abstractions/NodeType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -411,6 +401,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+          <folding>
+            <element signature="e#182#183#0" expanded="true" />
+            <element signature="e#221#222#0" expanded="true" />
+            <element signature="e#318#319#0" expanded="true" />
+            <element signature="e#359#360#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -463,20 +459,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/abstractions/Node.java">
+    <entry file="file://$PROJECT_DIR$/src/genetics/FunctionNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="52" column="86" lean-forward="true" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="86" />
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/FunctionNode.java">
+    <entry file="file://$PROJECT_DIR$/src/genetics/abstractions/Node.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="386">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/genetics/InputNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="23" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -485,8 +491,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/genetics/Network.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="106" selection-start-line="106" selection-end-line="106" />
+        <state relative-caret-position="296">
+          <caret line="310" column="68" lean-forward="true" selection-start-line="310" selection-start-column="68" selection-end-line="310" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

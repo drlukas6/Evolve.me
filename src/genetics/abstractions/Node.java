@@ -33,6 +33,7 @@ public abstract class Node {
         this.output = output;
     }
 
+
     @Override
     public int hashCode() {
         return 8 * coordinates.get("x") + 10 * coordinates.get("y") + 1000*(int) output;

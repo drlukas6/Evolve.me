@@ -18,6 +18,7 @@ public class FunctionNode extends Node {
         this.inputs = new ArrayList<>();
     }
 
+
     @Override
     public boolean isActive() {
         return active;
