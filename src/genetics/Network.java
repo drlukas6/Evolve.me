@@ -22,6 +22,7 @@ public class Network {
     private int passThrough = 0;
     private double fitness = 999.9;
     private List<Double> calculatedOutputs = new ArrayList<>();
+    private String networkDescriptor = new String();
 
     public Network(int numberOfRows, int numberOfColumns, int numberOfInputs,
                    int numberOfOutputs, int levelsBack) {
@@ -50,6 +51,10 @@ public class Network {
         String[] functionDescriptors = networkParts[1].split(";");
         String[] outputDescriptors = networkParts[2].split(";");
 
+    }
+
+    public String getNetworkDescriptor() {
+        return this.networkDescriptor;
     }
 
     private void generateInputNodes() {
@@ -122,7 +127,6 @@ public class Network {
         for (OutputNode node: outputNodes) {
             int randomRow;
             int randomCol;
-            int numberOfFunctionNodes = numberOfRows * numberOfColumns;
             randomRow = r.nextInt(numberOfRows);
             randomCol = r.nextInt(numberOfColumns);
             node.setInput(functionNodes.get(randomCol).get(randomRow));
@@ -285,7 +289,7 @@ public class Network {
         singlePointMutation();
     }
 
-    public String getNetworkDescriptor() {
+    public void generateNetworkDescriptor() {
         String descriptor = new String();
         for(InputNode node: inputNodes) {
             descriptor += node + ";";
@@ -300,17 +304,56 @@ public class Network {
         for(OutputNode node: outputNodes) {
             descriptor += node + node.getInput().toString() + ";";
         }
-        return descriptor;
+        this.networkDescriptor = descriptor;
     }
 
     private void parseNodeDescriptor(String descriptor) {
-        String nodeType = descriptor.substring(0, 1);
-        String[] stringCordinates = descriptor.substring(descriptor.indexOf("(") + 1, descriptor.indexOf(")")).split(", ");
-        Map<String, Integer> coordinates = new HashMap<>();
-        coordinates.put("x", Integer.parseInt(stringCordinates[0]));
-        coordinates.put("y", Integer.parseInt(stringCordinates[1]));
-
+        NodeType nodeType = getNodeTypeFromDescriptor(descriptor);
+        Operation operation = getNodeOperationFromDescriptor(descriptor);
     }
+
+    private NodeType getNodeTypeFromDescriptor(String descriptor) {
+        switch (descriptor.substring(0, 1)) {
+            case "i":
+                return NodeType.INPUT;
+            case "f":
+                return NodeType.FUNCTION;
+            default:
+                return NodeType.OUTPUT;
+        }
+    }
+
+    private Operation getNodeOperationFromDescriptor(String descriptor) {
+        return OperationFactory
+                .getOperationWithId(
+                        Integer.parseInt(
+                            descriptor.substring(1, descriptor.indexOf("(")))
+                );
+    }
+
+    private Map<String, Integer> getParsedCoordinates(String stringCoordinates) {
+        Map<String, Integer> coordinates = new HashMap<>();
+        String[] coors = stringCoordinates
+                .substring(stringCoordinates.indexOf("(") + 1, stringCoordinates.indexOf(")"))
+                .split(",");
+        coordinates.put("x", Integer.parseInt(coors[0]));
+        coordinates.put("y", Integer.parseInt(coors[1]));
+        return coordinates;
+    }
+
+    private List<Node> getNodeInputsFromDescriptor(String descriptor) {
+        List<Node> inputs = new ArrayList<>();
+        String rawInputs = descriptor.substring(descriptor.indexOf("[") + 1, descriptor.indexOf("]"));
+        switch(rawInputs.indexOf("),")) {
+            case -1:
+//                String unparsed = rawInputs.substring()
+            default:
+        }
+        return inputs;
+    }
+
+
+
 
     public void executeNetwork() {
         generateInputNodes();
@@ -321,8 +364,7 @@ public class Network {
         checkActiveNodes();
         completeEpoch();
         calculateFitness();
-        System.out.println(getNetworkDescriptor());
-
+        System.out.println(networkDescriptor);
     }
 
 
