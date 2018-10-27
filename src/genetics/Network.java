@@ -4,6 +4,9 @@ import genetics.abstractions.Node;
 import genetics.abstractions.NodeType;
 import genetics.operations.*;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Network {
@@ -50,7 +53,6 @@ public class Network {
         String[] inputDescriptors = networkParts[0].split(";");
         String[] functionDescriptors = networkParts[1].split(";");
         String[] outputDescriptors = networkParts[2].split(";");
-
     }
 
     public String getNetworkDescriptor() {
@@ -344,14 +346,31 @@ public class Network {
     private List<Node> getNodeInputsFromDescriptor(String descriptor) {
         List<Node> inputs = new ArrayList<>();
         String rawInputs = descriptor.substring(descriptor.indexOf("[") + 1, descriptor.indexOf("]"));
-        switch(rawInputs.indexOf("),")) {
+        int indexOfSeparator = rawInputs.indexOf("),");
+        switch(indexOfSeparator) {
             case -1:
-//                String unparsed = rawInputs.substring()
+                inputs.add(getNodeWithDescriptor(rawInputs));
+                break;
             default:
+                String[] rawInputsArray = rawInputs.split("\\),");
+                for(String unparsedInput: rawInputsArray) {
+                    inputs.add(getNodeWithDescriptor(unparsedInput));
+                }
+                break;
         }
         return inputs;
     }
 
+    Node getNodeWithDescriptor(String singleDescriptor) {
+        switch(singleDescriptor.substring(0, 1)) {
+            case "i":
+                return inputNodes.get(Integer.parseInt(singleDescriptor.substring(4, 5)));
+            default:
+                String unparsedCoordinates = singleDescriptor.substring(singleDescriptor.indexOf("(") + 1, singleDescriptor.indexOf(")"));
+                String[] coors = unparsedCoordinates.split(", ");
+                return functionNodes.get(Integer.parseInt(coors[0])).get(Integer.parseInt(coors[1]));
+        }
+    }
 
 
 
@@ -364,7 +383,13 @@ public class Network {
         checkActiveNodes();
         completeEpoch();
         calculateFitness();
+        generateNetworkDescriptor();
         System.out.println(networkDescriptor);
+        try {
+            Files.write(Paths.get("./networkDescriptor.txt"), networkDescriptor.getBytes());
+        } catch(Exception e) {
+            System.err.println(e);
+        }
     }
 
 
