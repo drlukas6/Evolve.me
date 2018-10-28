@@ -1,4 +1,4 @@
-import genetics.Network;
+import genetics.networks.Network;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,28 +18,6 @@ public class Main {
 //        Network network = new Network(3, 3, 3, 1, 1);
         Network network = new Network(3, 3, 1, 1, 2, outputs, inputs);
         network.executeNetwork();
-//        testingGround();
-    }
-
-    private static void testingGround() {
-        String test = "f10(3,1)[i(0, 0), f(0, 1)]";
-        System.out.println(test.indexOf("),")); // daje index zareza izmedu dva operatora
-        System.out.println(test.indexOf("],")); // -1 jer ne nade
-        String inputs = test.substring(test.indexOf("[") + 1, test.indexOf("]"));
-        System.out.println(inputs);
-        String coors = test.substring(test.indexOf("(") + 1, test.indexOf(")"));
-        System.out.println(coors);
-        String[] c = coors.split(",");
-        System.out.println(c[0] + "   " + c[1]);
-        String operation = test.substring(1, test.indexOf("("));
-        System.out.println(operation);
-        switch (test.substring(0, 1)) {
-            case "i":
-                System.out.println("ne");
-                break;
-            case "f":
-                System.out.println("da");
-                break;
-        }
+//        Network network = new Network("i(0, 0);-f8(0, 0)[i(0, 0)];f6(0, 1)[i(0, 0)];f7(0, 2)[i(0, 0)];f6(1, 0)[i(0, 0)];f4(1, 1)[i(0, 0)];f1(1, 2)[i(0, 0), f8(0, 0)];f0(2, 0)[f1(1, 2), f7(0, 2)];f7(2, 1)[f4(1, 1)];f2(2, 2)[f8(0, 0), f8(0, 0)];-o(0, 0)f7(2, 1);-3-3");
     }
 }

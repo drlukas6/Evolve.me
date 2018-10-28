@@ -1,13 +1,13 @@
-package genetics;
+package genetics.nodes;
 
-import genetics.abstractions.Node;
-import genetics.abstractions.NodeType;
+import genetics.nodes.Node;
+import genetics.nodes.NodeType;
 import genetics.operations.*;
 
 import java.util.*;
 
 public class FunctionNode extends Node {
-    private List<Node> inputs;
+    private List<Node> inputs = new ArrayList<>();
     private Operation operation;
     private boolean active;
 
@@ -15,7 +15,12 @@ public class FunctionNode extends Node {
         super(nodeType, output, coordinates, nodeId);
         Random r = new Random();
         this.operation = OperationFactory.getRandomOperation();
-        this.inputs = new ArrayList<>();
+    }
+
+    public FunctionNode(Map<String, Integer> coordinates) {
+        super(NodeType.FUNCTION, 0.0, coordinates, "f");
+        Random r = new Random();
+        this.operation = OperationFactory.getRandomOperation();
     }
 
 
@@ -36,6 +41,10 @@ public class FunctionNode extends Node {
         return inputs;
     }
 
+    public void setInputs(List<Node> inputs) {
+        this.inputs = inputs;
+    }
+
     public Operation getOperation() {
         return operation;
     }
@@ -45,7 +54,7 @@ public class FunctionNode extends Node {
     }
 
     @Override
-    protected void execute() {
+    public void execute() {
         switch(operation.getOperationArity()) {
             case 1:
                 output = operation.execute(inputs.get(0).getOutput());

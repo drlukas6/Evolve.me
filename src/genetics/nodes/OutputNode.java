@@ -1,7 +1,7 @@
-package genetics;
+package genetics.nodes;
 
-import genetics.abstractions.Node;
-import genetics.abstractions.NodeType;
+import genetics.nodes.Node;
+import genetics.nodes.NodeType;
 
 import java.util.*;
 
@@ -9,6 +9,10 @@ public class OutputNode extends Node {
     private Node input;
     public OutputNode(NodeType nodeType, double output, Map<String, Integer> coordinates, String nodeId) {
         super(nodeType, output, coordinates, nodeId);
+    }
+
+    public OutputNode(Map<String, Integer> coordinates) {
+        super(NodeType.OUTPUT, 0.0, coordinates, "o");
     }
 
     public Node getInput() {
@@ -31,7 +35,7 @@ public class OutputNode extends Node {
     }
 
     @Override
-    protected void execute() {
+    public void execute() {
         output = input.getOutput();
     }
 }

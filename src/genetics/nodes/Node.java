@@ -1,7 +1,6 @@
-package genetics.abstractions;
+package genetics.nodes;
 
 import java.util.Map;
-import java.util.Set;
 
 public abstract class Node {
     protected NodeType nodeType;
@@ -54,7 +53,7 @@ public abstract class Node {
         return nodeId + "(" + coordinates.get("x") + ", " + coordinates.get("y") + ")";
     }
 
-    protected abstract void execute();
+    public abstract void execute();
     public abstract void setActive(boolean active);
     public abstract boolean isActive();
 }

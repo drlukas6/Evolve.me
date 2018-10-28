@@ -1,12 +1,11 @@
-package genetics;
+package genetics.networks;
 
-import genetics.abstractions.Node;
-import genetics.abstractions.NodeType;
+import genetics.nodes.*;
 import genetics.operations.*;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class Network {
@@ -48,11 +47,18 @@ public class Network {
         this.inputValues = inputValues;
     }
 
-    public Network(String networkDescriptor) {
-        String[] networkParts = networkDescriptor.split(" | ");
-        String[] inputDescriptors = networkParts[0].split(";");
-        String[] functionDescriptors = networkParts[1].split(";");
-        String[] outputDescriptors = networkParts[2].split(";");
+    public Network(int numberOfRows, int numberOfColumns,
+                   int numberOfInputs, int numberOfOutputs,
+                   int levelsBack, List<InputNode> inputNodes,
+                   List<List<FunctionNode>> functionNodes, List<OutputNode> outputNodes) {
+        this.numberOfRows = numberOfRows;
+        this.numberOfColumns = numberOfColumns;
+        this.numberOfInputs = numberOfInputs;
+        this.numberOfOutputs = numberOfOutputs;
+        this.levelsBack = levelsBack;
+        this.inputNodes = inputNodes;
+        this.functionNodes = functionNodes;
+        this.outputNodes = outputNodes;
     }
 
     public String getNetworkDescriptor() {
@@ -296,80 +302,18 @@ public class Network {
         for(InputNode node: inputNodes) {
             descriptor += node + ";";
         }
-        descriptor += "| ";
+        descriptor += "-";
         for(List<FunctionNode> col: functionNodes) {
             for(FunctionNode node: col) {
                 descriptor += node + node.getInputs().toString() + ";";
             }
         }
-        descriptor += "| ";
+        descriptor += "-";
         for(OutputNode node: outputNodes) {
             descriptor += node + node.getInput().toString() + ";";
         }
+        descriptor += "-" + numberOfColumns + "-" + numberOfRows + "-" + levelsBack;
         this.networkDescriptor = descriptor;
-    }
-
-    private void parseNodeDescriptor(String descriptor) {
-        NodeType nodeType = getNodeTypeFromDescriptor(descriptor);
-        Operation operation = getNodeOperationFromDescriptor(descriptor);
-    }
-
-    private NodeType getNodeTypeFromDescriptor(String descriptor) {
-        switch (descriptor.substring(0, 1)) {
-            case "i":
-                return NodeType.INPUT;
-            case "f":
-                return NodeType.FUNCTION;
-            default:
-                return NodeType.OUTPUT;
-        }
-    }
-
-    private Operation getNodeOperationFromDescriptor(String descriptor) {
-        return OperationFactory
-                .getOperationWithId(
-                        Integer.parseInt(
-                            descriptor.substring(1, descriptor.indexOf("(")))
-                );
-    }
-
-    private Map<String, Integer> getParsedCoordinates(String stringCoordinates) {
-        Map<String, Integer> coordinates = new HashMap<>();
-        String[] coors = stringCoordinates
-                .substring(stringCoordinates.indexOf("(") + 1, stringCoordinates.indexOf(")"))
-                .split(",");
-        coordinates.put("x", Integer.parseInt(coors[0]));
-        coordinates.put("y", Integer.parseInt(coors[1]));
-        return coordinates;
-    }
-
-    private List<Node> getNodeInputsFromDescriptor(String descriptor) {
-        List<Node> inputs = new ArrayList<>();
-        String rawInputs = descriptor.substring(descriptor.indexOf("[") + 1, descriptor.indexOf("]"));
-        int indexOfSeparator = rawInputs.indexOf("),");
-        switch(indexOfSeparator) {
-            case -1:
-                inputs.add(getNodeWithDescriptor(rawInputs));
-                break;
-            default:
-                String[] rawInputsArray = rawInputs.split("\\),");
-                for(String unparsedInput: rawInputsArray) {
-                    inputs.add(getNodeWithDescriptor(unparsedInput));
-                }
-                break;
-        }
-        return inputs;
-    }
-
-    Node getNodeWithDescriptor(String singleDescriptor) {
-        switch(singleDescriptor.substring(0, 1)) {
-            case "i":
-                return inputNodes.get(Integer.parseInt(singleDescriptor.substring(4, 5)));
-            default:
-                String unparsedCoordinates = singleDescriptor.substring(singleDescriptor.indexOf("(") + 1, singleDescriptor.indexOf(")"));
-                String[] coors = unparsedCoordinates.split(", ");
-                return functionNodes.get(Integer.parseInt(coors[0])).get(Integer.parseInt(coors[1]));
-        }
     }
 
 
@@ -386,7 +330,7 @@ public class Network {
         generateNetworkDescriptor();
         System.out.println(networkDescriptor);
         try {
-            Files.write(Paths.get("./networkDescriptor.txt"), networkDescriptor.getBytes());
+            Files.write(Paths.get("./networkDescriptor.txt"), networkDescriptor.getBytes(), StandardOpenOption.APPEND);
         } catch(Exception e) {
             System.err.println(e);
         }
