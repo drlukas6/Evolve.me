@@ -23,6 +23,7 @@ public class Organism {
     private int generation = 0;
     private int maxGeneration;
     Comparator<Network> fitnessComparator = Comparator.comparing(Network::getFitness);
+    private Network bestOfAllTime;
     Random r = new Random();
 
     public Organism(int numberOfNetworks, int numberOfRows,
@@ -40,6 +41,8 @@ public class Organism {
         this.networkFactory = new NetworkFactory(outputValues, inputValues, numberOfRows, numberOfColumns, numberOfInputs, numberOfOutputs, levelsBack);
     }
 
+
+
     private void generateInitialNetworks() {
         for(int i = 0; i < numberOfNetworks; i++) {
             networkPopulation.add(networkFactory.createRandomNetwork());
@@ -52,9 +55,12 @@ public class Organism {
         }
     }
 
+    private void sortNetworks() {
+        networkPopulation.sort(fitnessComparator);
+    }
+
     private void createNextGeneration() {
         List<Network> nextGeneration = new ArrayList<>();
-        networkPopulation.sort(fitnessComparator);
         for (int i = 0; i < numberOfNetworks; i++) {
             List<Network> chosenNetworks = new ArrayList<>();
             chosenNetworks.add(networkPopulation.get(0));
@@ -87,19 +93,28 @@ public class Organism {
             out.println("-------------------- GENERATION: " + generation + "--------------------");
             out.flush();
             executeInitialNetworks();
+            sortNetworks();
+            bestOfAllTime = networkPopulation.get(0);
             while (generation < maxGeneration) {
                 createNextGeneration();
                 mutateAndExecuteNetworks();
+                sortNetworks();
+                if(bestOfAllTime.getFitness() > networkPopulation.get(0).getFitness()) {
+                    bestOfAllTime = networkPopulation.get(0);
+                }
                 out.println("-------------------- GENERATION: " + generation + "--------------------");
+                System.out.println("-------------------- GENERATION: " + generation + "--------------------");
                 out.println("BEST NETWORK: ");
                 out.println(networkPopulation.get(0).getFitness());
                 out.println(networkPopulation.get(0).getNetworkDescriptor());
                 out.flush();
             }
             out.println("-------------------- MAX GENERATION REACHED --------------------");
-            networkPopulation.sort(fitnessComparator);
             out.println("-------------------- BEST FITNESS: " + networkPopulation.get(0).getFitness() + "--------------------");
             out.println(networkPopulation.get(0).getNetworkDescriptor());
+            out.println("-------------------- BEST NETWORK: --------------------");
+            out.println(bestOfAllTime.getNetworkDescriptor());
+            out.println(bestOfAllTime.getFitness());
             out.flush();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -111,10 +126,10 @@ public class Organism {
                 out.close();
             }
         }
+    }
 
-
-
-
+    public void testBestNetwork() {
+        bestOfAllTime.testNetworkPerformances();
     }
 
 

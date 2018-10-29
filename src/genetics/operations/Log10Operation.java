@@ -12,6 +12,9 @@ public class Log10Operation extends Operation {
 
     @Override
     public double execute(Double... inputs) {
+        if(inputs[0] - 0.0 <= 0.0001) {
+            return Math.log10(0.0001);
+        }
         return Math.log10(Math.abs(inputs[0]));
     }
 }

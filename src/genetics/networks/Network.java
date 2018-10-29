@@ -252,9 +252,7 @@ public class Network {
 
     private boolean mutateRandomOutputNode() {
         int randomOutputNode = r.nextInt(numberOfOutputs);
-        int maxColumn = numberOfColumns - 1;
-        int minColumn = maxColumn - levelsBack;
-        int randomColumn = r.nextInt(maxColumn + 1 - minColumn) + minColumn;
+        int randomColumn = r.nextInt(numberOfColumns);
         int randomRow = r.nextInt(numberOfRows);
         OutputNode node = outputNodes.get(randomOutputNode);
         node.setInput(functionNodes.get(randomColumn).get(randomRow));
@@ -357,6 +355,14 @@ public class Network {
         System.out.println(networkDescriptor);
         System.out.println(fitness);
         System.out.println("------------------------------------------------------");
+    }
+
+    public void testNetworkPerformances() {
+        completeEpoch();
+        System.out.println("\tINPUT\tGA-OUTPUT\tREAL-OUTPUT\tDIFFERENCE");
+        for(int i = 0; i < inputValues.size(); i++) {
+            System.out.format("%7.3f\t\t%7.3f\t\t%7.3f\t\t%7.3f\n", inputValues.get(i), calculatedOutputs.get(i), outputValues.get(i), Math.abs(outputValues.get(i) - calculatedOutputs.get(i)));
+        }
     }
 
 

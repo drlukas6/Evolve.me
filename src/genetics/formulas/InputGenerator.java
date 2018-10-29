@@ -13,7 +13,7 @@ public class InputGenerator {
         double input = (double)rangeStart;
         while (input <= (double) rangeEnd) {
             inputs.add(input);
-            double value = Math.log(input + 1) + Math.log(Math.pow(input, 2) + 1);
+            double value = Math.log10(input + 1) + Math.log10(Math.pow(input, 2) + 1);
             outputs.add(value);
             input += step;
         }

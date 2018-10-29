@@ -1,24 +1,18 @@
+import genetics.formulas.InputGenerator;
 import genetics.networks.Network;
 import genetics.organism.Organism;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        List<Double> inputs = new ArrayList<>();
-        inputs.add(2.4889);
-        inputs.add(3.8255);
-        inputs.add(4.9972);
-        inputs.add(6.0764);
-        inputs.add(7.5674);
-        List<Double> outputs = new ArrayList<>();
-        outputs.add(1.4645);
-        outputs.add(2.1731);
-        outputs.add(2.6514);
-        outputs.add(3.0261);
-        outputs.add(3.4777);
-        Organism organism = new Organism(20, 31, 31, 5, 1, 1, inputs, outputs, 20);
+        Map<String, List<Double>> values = InputGenerator.inputData(0.5, 0, 20);
+        List<Double> inputs = values.get("input");
+        List<Double> outputs = values.get("output");
+        Organism organism = new Organism(20, 31, 31, 31, 1, 1, inputs, outputs, 1000);
         organism.startTraining();
+        organism.testBestNetwork();
     }
 }
