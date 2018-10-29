@@ -11,6 +11,6 @@ public class CosOperation extends Operation {
 
     @Override
     public double execute(Double... inputs) {
-        return (Math.cos(Math.toDegrees(inputs[0])));
+        return (Math.cos(inputs[0]));
     }
 }

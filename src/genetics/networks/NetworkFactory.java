@@ -3,7 +3,6 @@ package genetics.networks;
 import genetics.nodes.*;
 import genetics.operations.Operation;
 import genetics.operations.OperationFactory;
-import jdk.internal.util.xml.impl.Input;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,11 +10,33 @@ import java.util.List;
 import java.util.Map;
 
 public class NetworkFactory {
-    private static List<InputNode> inputNodes;
-    private static List<List<FunctionNode>> functionNodes;
-    private static List<OutputNode> outputNodes;
+    private  List<InputNode> inputNodes = new ArrayList<>();
+    private  List<List<FunctionNode>> functionNodes = new ArrayList<>();
+    private  List<OutputNode> outputNodes = new ArrayList<>();
 
-    public static Network createNetworkWithDescriptor(String networkDescriptor) {
+    private  List<Double> outputValues;
+    private  List<Double> inputValues;
+    private int numberOfRows;
+    private int numberOfColumns;
+    private int numberOfInputs;
+    private int numberOfOutputs;
+    private int levelsBack;
+
+    public NetworkFactory(List<Double> outputValues, List<Double> inputValues, int numberOfRows, int numberOfColumns, int numberOfInputs, int numberOfOutputs, int levelsBack) {
+        this.outputValues = outputValues;
+        this.inputValues = inputValues;
+        this.numberOfRows = numberOfRows;
+        this.numberOfColumns = numberOfColumns;
+        this.numberOfInputs = numberOfInputs;
+        this.numberOfOutputs = numberOfOutputs;
+        this.levelsBack = levelsBack;
+    }
+
+    public Network createRandomNetwork() {
+        return new Network(numberOfRows, numberOfColumns, numberOfInputs, numberOfOutputs, levelsBack, outputValues, inputValues);
+    }
+
+    public Network createNetworkWithDescriptor(String networkDescriptor) {
         inputNodes = new ArrayList<>();
         functionNodes = new ArrayList<>();
         outputNodes = new ArrayList<>();
@@ -48,11 +69,50 @@ public class NetworkFactory {
         parseFunctionNodes(unparsedFunctionNodes);
         parseOutputNodes(unparsedOutputs);
 
-        Network network = new Network(numberOfRows, numberOfColumns, numberOfInputs, numberOfOutputs, levelsBack, inputNodes, functionNodes, outputNodes);
+        Network network = new Network(numberOfRows, numberOfColumns, numberOfInputs, numberOfOutputs, levelsBack, inputNodes, functionNodes, outputNodes, inputValues, outputValues);
         return network;
     }
 
-    private static void parseOutputNodes(String[] unparsedOutputNodes) {
+    public Network combineNetworks(Network lhs, Network rhs) {
+        String networkDescriptorLhs = lhs.getNetworkDescriptor();
+        String[] lhsNetworkParts = networkDescriptorLhs.split("-");
+        String[] lhsFunctions = lhsNetworkParts[1].split(";");
+        String[] lhsOutputs = lhsNetworkParts[2].split(";");
+        String networkDescriptorRhs = rhs.getNetworkDescriptor();
+        String[] rhsNetworkParts = networkDescriptorRhs.split("-");
+        String[] rhsFunctions = rhsNetworkParts[1].split(";");
+        String[] rhsOutputs = rhsNetworkParts[2].split(";");
+
+        int splitter = lhsFunctions.length / 2;
+
+        String descriptor = lhsFunctions[0] + "-";
+
+        for(int i = 0; i < splitter; i++) {
+            descriptor += lhsFunctions[i] + ";";
+        }
+        for(int i = splitter; i < rhsFunctions.length; i++) {
+            descriptor += rhsFunctions[i] + ";";
+        }
+
+        descriptor += "-";
+
+        if(lhs.getFitness() < rhs.getFitness()) {
+            for(int i = 0; i < lhsOutputs.length; i++) {
+                descriptor += lhsOutputs[i] + ";";
+            }
+        }
+        else {
+            for(int i = 0; i < rhsOutputs.length; i++) {
+                descriptor += rhsOutputs[i] + ";";
+            }
+        }
+
+        descriptor += "-" + lhsNetworkParts[3] + "-" + lhsNetworkParts[4] + "-" + lhsNetworkParts[5];
+
+        return createNetworkWithDescriptor(descriptor);
+    }
+
+    private void parseOutputNodes(String[] unparsedOutputNodes) {
         for(String unparsedOutputNode: unparsedOutputNodes) {
             String shortInputDescription = unparsedOutputNode.substring(unparsedOutputNode.indexOf("f"));
             Map<String, Integer> coordinates = getNodeCoordinates(unparsedOutputNode);
@@ -63,7 +123,7 @@ public class NetworkFactory {
         }
     }
 
-    private static void parseFunctionNodes(String[] unparsedFunctionNodes) {
+    private void parseFunctionNodes(String[] unparsedFunctionNodes) {
         for(String unparsedFunctionNode: unparsedFunctionNodes) {
             String shortNodeDescriptor = unparsedFunctionNode.substring(0, unparsedFunctionNode.indexOf(")") + 1);
             Operation nodeOperation = getNodeOperation(unparsedFunctionNode);
@@ -76,13 +136,13 @@ public class NetworkFactory {
         }
     }
 
-    private static Operation getNodeOperation(String nodeDescriptor) {
+    private Operation getNodeOperation(String nodeDescriptor) {
         int operationId = Integer.parseInt(nodeDescriptor.substring(1, 2));
         return OperationFactory.getOperationWithId(operationId);
     }
 
 //    shortNodeDescriptor = f2(0, 0)
-    private static Map<String, Integer> getNodeCoordinates(String shortNodeDescriptor) {
+    private Map<String, Integer> getNodeCoordinates(String shortNodeDescriptor) {
         Map<String, Integer> coordinates = new HashMap<>();
         String[] unparsedCoordinates = shortNodeDescriptor.substring(shortNodeDescriptor.indexOf("(") + 1, shortNodeDescriptor.indexOf(")")).split(", ");
         coordinates.put("x", Integer.parseInt(unparsedCoordinates[0]));
@@ -90,7 +150,7 @@ public class NetworkFactory {
         return coordinates;
     }
 
-    private static List<Node> getNodeInputs(String nodeDescriptor) {
+    private List<Node> getNodeInputs(String nodeDescriptor) {
         List<Node> nodeInputs = new ArrayList<>();
         String unparsedNodeInputs = nodeDescriptor.substring(nodeDescriptor.indexOf("[") + 1, nodeDescriptor.indexOf("]"));
         int indexOfSeparator = unparsedNodeInputs.indexOf("),");
@@ -111,7 +171,7 @@ public class NetworkFactory {
         return nodeInputs;
     }
 
-    private static Node getNodeWithDescription(String shortNodeDescription) {
+    private Node getNodeWithDescription(String shortNodeDescription) {
         Map<String, Integer> inputNodeCoordinates = getNodeCoordinates(shortNodeDescription);
         Node node;
         switch (shortNodeDescription.substring(0, 1)) {

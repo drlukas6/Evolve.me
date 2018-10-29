@@ -50,7 +50,8 @@ public class Network {
     public Network(int numberOfRows, int numberOfColumns,
                    int numberOfInputs, int numberOfOutputs,
                    int levelsBack, List<InputNode> inputNodes,
-                   List<List<FunctionNode>> functionNodes, List<OutputNode> outputNodes) {
+                   List<List<FunctionNode>> functionNodes, List<OutputNode> outputNodes,
+                   List<Double> inputValues, List<Double> outputValues) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.numberOfInputs = numberOfInputs;
@@ -59,10 +60,16 @@ public class Network {
         this.inputNodes = inputNodes;
         this.functionNodes = functionNodes;
         this.outputNodes = outputNodes;
+        this.inputValues = inputValues;
+        this.outputValues = outputValues;
     }
 
     public String getNetworkDescriptor() {
         return this.networkDescriptor;
+    }
+
+    public double getFitness() {
+        return fitness;
     }
 
     private void generateInputNodes() {
@@ -73,8 +80,8 @@ public class Network {
             InputNode node = new InputNode(NodeType.INPUT, 0.0, coordinates, "i");
             inputNodes.add(node);
         }
-        System.out.println("========================\tGenerated " + inputNodes.size() + " Input nodes\t\t========================");
-        System.out.println(inputNodes);
+//        System.out.println("========================\tGenerated " + inputNodes.size() + " Input nodes\t\t========================");
+//        System.out.println(inputNodes);
     }
 
     private void populateInputNodes(boolean isRandom) {
@@ -104,8 +111,8 @@ public class Network {
                 functionNodes.get(i).add(new FunctionNode(NodeType.FUNCTION, 0.0, coordinates, "f"));
             }
         }
-        System.out.println("========================\tGenerated " + numberOfNodes + " Function nodes\t========================");
-        System.out.println(functionNodes);
+//        System.out.println("========================\tGenerated " + numberOfNodes + " Function nodes\t========================");
+//        System.out.println(functionNodes);
     }
 
     private void generateRandomOutputNodes() {
@@ -115,30 +122,30 @@ public class Network {
             coordinates.put("y", i);
             outputNodes.add(new OutputNode(NodeType.OUTPUT, 0.0, coordinates, "o"));
         }
-        System.out.println("========================\tGenerated " + outputNodes.size() + " Output nodes\t========================");
-        System.out.println(outputNodes);
+//        System.out.println("========================\tGenerated " + outputNodes.size() + " Output nodes\t========================");
+//        System.out.println(outputNodes);
     }
 
 
     private void randomConnectFunctionNodes() {
-        System.out.println("========================\tConnecting function nodes\t========================");
+//        System.out.println("========================\tConnecting function nodes\t========================");
         for(List<FunctionNode> col: functionNodes) {
             for(FunctionNode node: col) {
                 mutateFunctionNodeInputs(node, false);
-                System.out.println("Connected node " + node + " to node(s): " + node.getInputs());
+//                System.out.println("Connected node " + node + " to node(s): " + node.getInputs());
             }
         }
     }
 
     private void randomConnectOutputNodes() {
-        System.out.println("========================\tConnecting Output nodes\t\t========================");
+//        System.out.println("========================\tConnecting Output nodes\t\t========================");
         for (OutputNode node: outputNodes) {
             int randomRow;
             int randomCol;
             randomRow = r.nextInt(numberOfRows);
             randomCol = r.nextInt(numberOfColumns);
             node.setInput(functionNodes.get(randomCol).get(randomRow));
-            System.out.println("Connected output node at " + node + " to node: " + node.getInput());
+//            System.out.println("Connected output node at " + node + " to node: " + node.getInput());
         }
     }
 
@@ -156,8 +163,8 @@ public class Network {
         }
     }
 
-    private void checkActiveNodes() {
-        System.out.println("========================\tMarking selected nodes\t\t========================");
+    public void checkActiveNodes() {
+//        System.out.println("========================\tMarking selected nodes\t\t========================");
         for(List<FunctionNode> nodeCol: functionNodes) {
             for(FunctionNode node: nodeCol) {
                 node.setActive(false);
@@ -176,7 +183,7 @@ public class Network {
     }
 
     private void singlePointMutation() {
-        System.out.println("========================\tSingle point mutation\t\t========================");
+//        System.out.println("========================\tSingle point mutation\t\t========================");
         boolean isChangedActive = false;
         do {
             if(r.nextInt((numberOfColumns * numberOfRows + numberOfOutputs) + 1) > numberOfRows*numberOfColumns) {
@@ -186,7 +193,7 @@ public class Network {
                 isChangedActive = mutateRandomFunctionNode();
             }
         } while(!isChangedActive);
-        System.out.println("Single point mutation completed");
+//        System.out.println("Single point mutation completed");
     }
 
     private boolean mutateRandomFunctionNode() {
@@ -223,7 +230,7 @@ public class Network {
             }
         } while(node.getInputs().size() < node.getOperation().getOperationArity());
         if(shouldOutput) {
-            System.out.println("Changing Function node " + node + "; NEW CONNECTION(S): " + node.getInputs());
+//            System.out.println("Changing Function node " + node + "; NEW CONNECTION(S): " + node.getInputs());
         }
         return node.isActive();
     }
@@ -239,7 +246,7 @@ public class Network {
                 foundTargetArity = true;
             }
         } while (!foundTargetArity);
-        System.out.println("Changing Function node " + node + "; NEW OPERATION: " + node.getOperation().getOperationId());
+//        System.out.println("Changing Function node " + node + "; NEW OPERATION: " + node.getOperation().getOperationId());
         return node.isActive();
     }
 
@@ -251,7 +258,7 @@ public class Network {
         int randomRow = r.nextInt(numberOfRows);
         OutputNode node = outputNodes.get(randomOutputNode);
         node.setInput(functionNodes.get(randomColumn).get(randomRow));
-        System.out.println("Changing output node " + node + "; NEW CONNECTION: " + node.getInput());
+//        System.out.println("Changing output node " + node + "; NEW CONNECTION: " + node.getInput());
         return node.isActive();
     }
 
@@ -269,8 +276,9 @@ public class Network {
             sum += Math.pow((outputValues.get(i) - calculatedOutputs.get(i)), 2);
         }
         fitness =  Math.sqrt(sum / (outputValues.size() - 2));
-        System.out.println("========================\tFitness calculation\t\t\t========================");
-        System.out.println("FITNESS: " + fitness);
+        System.out.println("");
+//        System.out.println("========================\tFitness calculation\t\t\t========================");
+//        System.out.println("FITNESS: " + fitness);
     }
 
     private void completeEpoch() {
@@ -281,6 +289,7 @@ public class Network {
             calculatedOutputs.add(outputNodes.get(0).getOutput());
             ++passThrough;
         }
+        passThrough = 0;
     }
 
 
@@ -318,7 +327,7 @@ public class Network {
 
 
 
-    public void executeNetwork() {
+    public void executeInitialNetwork() {
         generateInputNodes();
         generateRandomFunctionNodes();
         randomConnectFunctionNodes();
@@ -328,13 +337,28 @@ public class Network {
         completeEpoch();
         calculateFitness();
         generateNetworkDescriptor();
+        System.out.println("======================================================");
         System.out.println(networkDescriptor);
-        try {
-            Files.write(Paths.get("./networkDescriptor.txt"), networkDescriptor.getBytes(), StandardOpenOption.APPEND);
-        } catch(Exception e) {
-            System.err.println(e);
-        }
+        System.out.println(fitness);
+        System.out.println("------------------------------------------------------");
+
     }
+
+    public void mutateNetwork() {
+        singlePointMutation();
+    }
+
+    public void executeNetwork() {
+        checkActiveNodes();
+        completeEpoch();
+        calculateFitness();
+        generateNetworkDescriptor();
+        System.out.println("======================================================");
+        System.out.println(networkDescriptor);
+        System.out.println(fitness);
+        System.out.println("------------------------------------------------------");
+    }
+
 
 
 }

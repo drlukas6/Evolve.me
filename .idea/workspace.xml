@@ -2,24 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4cb8977-6627-433e-8a02-15088cdc77e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/TestingGround.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/genetics/networks/NetworkFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrganismOutput.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/genetics/formulas/InputGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/genetics/organism/Organism.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/networkDescriptor.txt" beforeDir="false" afterPath="$PROJECT_DIR$/networkDescriptor.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/networkDescriptor.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CGProgramming/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/FunctionNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/InputNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/Network.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/OutputNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/abstractions/Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/abstractions/NodeType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/operations/CosOperation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CGProgramming/genetics/operations/CosOperation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/operations/Log10Operation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CGProgramming/genetics/operations/Log10Operation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/operations/SinOperation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CGProgramming/genetics/operations/SinOperation.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/genetics/FunctionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/nodes/FunctionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/genetics/InputNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/nodes/InputNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/genetics/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/networks/Network.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/genetics/OutputNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/nodes/OutputNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/genetics/abstractions/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/nodes/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/genetics/abstractions/NodeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/nodes/NodeType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestingGround.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestingGround.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/genetics/networks/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/networks/Network.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/genetics/networks/NetworkFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/networks/NetworkFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/genetics/operations/CosOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/operations/CosOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/genetics/operations/Log10Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/operations/Log10Operation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/genetics/operations/SinOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/operations/SinOperation.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,7 +36,7 @@
     <session id="1033790200">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.10" value="2" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="2" />
@@ -46,45 +44,46 @@
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="iml" value="1" />
-          <entry key="java" value="87" />
-          <entry key="txt" value="2" />
+          <entry key="java" value="98" />
+          <entry key="txt" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="87" />
-          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="JAVA" value="98" />
+          <entry key="PLAIN_TEXT" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="23310" />
+          <entry key="java" value="28574" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="23310" />
+          <entry key="JAVA" value="28574" />
           <entry key="PLAIN_TEXT" value="2" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/genetics/organism/Organism.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+            <state relative-caret-position="232">
+              <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,10 +92,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/networkDescriptor.txt">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="207" lean-forward="true" selection-start-column="207" selection-end-column="207" />
+            <state relative-caret-position="300">
+              <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/genetics/formulas/InputGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/genetics/nodes/FunctionNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/genetics/networks/NetworkFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="173" column="70" selection-start-line="173" selection-start-column="70" selection-end-line="173" selection-end-column="70" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,10 +139,53 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/genetics/networks/Network.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="43" column="47" lean-forward="true" selection-start-line="43" selection-start-column="47" selection-end-line="43" selection-end-column="47" />
+            <state relative-caret-position="17">
+              <caret line="278" selection-start-line="278" selection-end-line="278" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2535#2536#0" expanded="true" />
+                <element signature="e#2565#2566#0" expanded="true" />
+                <element signature="e#12925#12926#0" expanded="true" />
+                <element signature="e#12962#12963#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/genetics/operations/Log10Operation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+              <folding>
+                <element signature="e#335#336#0" expanded="true" />
+                <element signature="e#389#390#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/genetics/operations/CosOperation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+              <folding>
+                <element signature="e#326#327#0" expanded="true" />
+                <element signature="e#370#371#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/genetics/operations/SinOperation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
+              <folding>
+                <element signature="e#326#327#0" expanded="true" />
+                <element signature="e#376#377#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,31 +194,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/TestingGround.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="255">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/genetics/nodes/InputNode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="27" lean-forward="true" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/genetics/networks/NetworkFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="125" column="5" lean-forward="true" selection-start-line="125" selection-start-column="5" selection-end-line="125" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#186#187#0" expanded="true" />
+                <element signature="e#212#213#0" expanded="true" />
+                <element signature="e#237#238#0" expanded="true" />
+                <element signature="e#261#262#0" expanded="true" />
+                <element signature="e#359#360#0" expanded="true" />
+                <element signature="e#383#384#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -159,6 +222,10 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>node.exec</find>
+      <find>getNet</find>
+      <find>Sy</find>
+      <find>check</find>
+      <find>calculated</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -178,10 +245,7 @@
         <option value="$PROJECT_DIR$/src/genetics/operations/NegativeOperation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/SubstractOperation.java" />
         <option value="$PROJECT_DIR$/src/genetics/OutputNode.java" />
-        <option value="$PROJECT_DIR$/src/genetics/operations/SinOperation.java" />
-        <option value="$PROJECT_DIR$/src/genetics/operations/CosOperation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/SquareOperation.java" />
-        <option value="$PROJECT_DIR$/src/genetics/operations/Log10Operation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/Operation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/OperationFactory.java" />
         <option value="$PROJECT_DIR$/src/genetics/abstractions/Node.java" />
@@ -192,12 +256,18 @@
         <option value="$PROJECT_DIR$/src/genetics/nodes/FunctionNode.java" />
         <option value="$PROJECT_DIR$/src/genetics/nodes/NodeType.java" />
         <option value="$PROJECT_DIR$/src/genetics/nodes/OutputNode.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/networkDescriptor.txt" />
-        <option value="$PROJECT_DIR$/src/genetics/networks/Network.java" />
-        <option value="$PROJECT_DIR$/src/TestingGround.java" />
-        <option value="$PROJECT_DIR$/src/genetics/networks/NetworkFactory.java" />
         <option value="$PROJECT_DIR$/src/genetics/nodes/InputNode.java" />
+        <option value="$PROJECT_DIR$/src/genetics/networks/NetworkFactory.java" />
+        <option value="$PROJECT_DIR$/src/TestingGround.java" />
+        <option value="$PROJECT_DIR$/OrganismOutput.txt" />
+        <option value="$PROJECT_DIR$/src/genetics/organism/Organism.java" />
+        <option value="$PROJECT_DIR$/src/genetics/networks/Network.java" />
+        <option value="$PROJECT_DIR$/src/genetics/operations/CosOperation.java" />
+        <option value="$PROJECT_DIR$/src/genetics/operations/SinOperation.java" />
+        <option value="$PROJECT_DIR$/src/genetics/operations/Log10Operation.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/genetics/formulas/InputGenerator.java" />
       </list>
     </option>
   </component>
@@ -208,7 +278,6 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="-1050" />
     <option name="width" value="1680" />
     <option name="height" value="1050" />
   </component>
@@ -218,7 +287,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -237,24 +305,11 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="genetics" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="CGProgramming" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CGProgramming" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="genetics" type="462c0819:PsiDirectoryNode" />
-              <item name="networks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CGProgramming" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CGProgramming" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="genetics" type="462c0819:PsiDirectoryNode" />
-              <item name="nodes" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -262,10 +317,10 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/lukassestic/Library/Mobile Documents/com~apple~CloudDocs/FER/V. Semestar/Projekt/CGProgramming/networkDescriptor.txt" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540742168318" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540823444537" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -279,7 +334,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TestingGround">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="CGProgramming" />
@@ -300,8 +355,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestingGround" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.TestingGround" />
       </list>
     </recent_temporary>
   </component>
@@ -326,15 +381,17 @@
       <workItem from="1540574928732" duration="283000" />
       <workItem from="1540656224062" duration="13291000" />
       <workItem from="1540736714143" duration="35000" />
-      <workItem from="1540736778465" duration="4572000" />
+      <workItem from="1540736778465" duration="5076000" />
+      <workItem from="1540747763289" duration="14593000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67470000" />
+    <option name="totallyTimeSpent" value="82567000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-1050" width="1680" height="1050" extended-state="0" />
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16605617" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -345,13 +402,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27857143" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.27857143" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32040817" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32959184" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32959184" />
@@ -368,25 +425,26 @@
       <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.0" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25274727" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16605617" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.32959184" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.32959184" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.27857143" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32040817" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32959184" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32959184" />
+      <window_info anchor="bottom" id="Statistic" order="12" weight="0.32959184" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -396,6 +454,7 @@
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Database" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.0" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,6 +462,28 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <condition expression="Double.isNaN(fitness)" language="JAVA" />
+          <url>file://$PROJECT_DIR$/src/genetics/networks/Network.java</url>
+          <line>278</line>
+          <properties />
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>Double.isNaN(fitness)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/genetics/abstractions/Tuple.java" />
@@ -448,13 +529,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/operations/CosOperation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/genetics/operations/OperationFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -462,24 +536,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/operations/Log10Operation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/genetics/operations/DivideOperation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/operations/SinOperation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="3" lean-forward="true" selection-start-line="3" selection-start-column="3" selection-end-line="14" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -494,13 +554,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/nodes/FunctionNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -535,27 +588,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/genetics/networks/NetworkFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        <state relative-caret-position="432">
+          <caret line="173" column="70" selection-start-line="173" selection-start-column="70" selection-end-line="173" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/networkDescriptor.txt">
+    <entry file="file://$PROJECT_DIR$/src/genetics/organism/Organism.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="207" lean-forward="true" selection-start-column="207" selection-end-column="207" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/networks/Network.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="43" column="47" lean-forward="true" selection-start-line="43" selection-start-column="47" selection-end-line="43" selection-end-column="47" />
+        <state relative-caret-position="232">
+          <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -564,18 +610,93 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TestingGround.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#186#187#0" expanded="true" />
+            <element signature="e#212#213#0" expanded="true" />
+            <element signature="e#237#238#0" expanded="true" />
+            <element signature="e#261#262#0" expanded="true" />
+            <element signature="e#359#360#0" expanded="true" />
+            <element signature="e#383#384#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/genetics/nodes/FunctionNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/genetics/operations/CosOperation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+          <folding>
+            <element signature="e#326#327#0" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/genetics/operations/SinOperation.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#326#327#0" expanded="true" />
+            <element signature="e#376#377#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OrganismOutput.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3230" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/genetics/networks/Network.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="278" selection-start-line="278" selection-end-line="278" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2535#2536#0" expanded="true" />
+            <element signature="e#2565#2566#0" expanded="true" />
+            <element signature="e#12925#12926#0" expanded="true" />
+            <element signature="e#12962#12963#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/genetics/operations/Log10Operation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="e#335#336#0" expanded="true" />
+            <element signature="e#389#390#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/networks/NetworkFactory.java">
+    <entry file="file://$PROJECT_DIR$/src/genetics/formulas/InputGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="125" column="5" lean-forward="true" selection-start-line="125" selection-start-column="5" selection-end-line="125" selection-end-column="5" />
+        <state relative-caret-position="180">
+          <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

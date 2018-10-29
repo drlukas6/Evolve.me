@@ -12,6 +12,6 @@ public class Log10Operation extends Operation {
 
     @Override
     public double execute(Double... inputs) {
-        return Math.log10(inputs[0]);
+        return Math.log10(Math.abs(inputs[0]));
     }
 }

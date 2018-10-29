@@ -1,4 +1,5 @@
 import genetics.networks.Network;
+import genetics.organism.Organism;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,18 +7,18 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<Double> inputs = new ArrayList<>();
-        inputs.add(0.1);
-        inputs.add(1.);
-        inputs.add(2.);
-        inputs.add(3.);
+        inputs.add(2.4889);
+        inputs.add(3.8255);
+        inputs.add(4.9972);
+        inputs.add(6.0764);
+        inputs.add(7.5674);
         List<Double> outputs = new ArrayList<>();
-        outputs.add(0.);
-        outputs.add(1.83);
-        outputs.add(3.);
-        outputs.add(3.15);
-//        Network network = new Network(3, 3, 3, 1, 1);
-        Network network = new Network(3, 3, 1, 1, 2, outputs, inputs);
-        network.executeNetwork();
-//        Network network = new Network("i(0, 0);-f8(0, 0)[i(0, 0)];f6(0, 1)[i(0, 0)];f7(0, 2)[i(0, 0)];f6(1, 0)[i(0, 0)];f4(1, 1)[i(0, 0)];f1(1, 2)[i(0, 0), f8(0, 0)];f0(2, 0)[f1(1, 2), f7(0, 2)];f7(2, 1)[f4(1, 1)];f2(2, 2)[f8(0, 0), f8(0, 0)];-o(0, 0)f7(2, 1);-3-3");
+        outputs.add(1.4645);
+        outputs.add(2.1731);
+        outputs.add(2.6514);
+        outputs.add(3.0261);
+        outputs.add(3.4777);
+        Organism organism = new Organism(20, 31, 31, 5, 1, 1, inputs, outputs, 20);
+        organism.startTraining();
     }
 }
