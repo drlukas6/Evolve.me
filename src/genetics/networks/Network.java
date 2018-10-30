@@ -19,7 +19,7 @@ public class Network {
     private int levelsBack;
     private Random r = new Random();
     private List<Double> outputValues;
-    private List<Double> inputValues;
+    private List<List<Double>> inputValues;
     private int generation = 0;
     private int passThrough = 0;
     private double fitness = 999.9;
@@ -37,7 +37,7 @@ public class Network {
 
     public Network(int numberOfRows, int numberOfColumns, int numberOfInputs,
                    int numberOfOutputs, int levelsBack,
-                   List<Double> outputValues, List<Double> inputValues) {
+                   List<Double> outputValues, List<List<Double>> inputValues) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.numberOfInputs = numberOfInputs;
@@ -51,7 +51,7 @@ public class Network {
                    int numberOfInputs, int numberOfOutputs,
                    int levelsBack, List<InputNode> inputNodes,
                    List<List<FunctionNode>> functionNodes, List<OutputNode> outputNodes,
-                   List<Double> inputValues, List<Double> outputValues) {
+                   List<List<Double>> inputValues, List<Double> outputValues) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.numberOfInputs = numberOfInputs;
@@ -85,17 +85,18 @@ public class Network {
     }
 
     private void populateInputNodes(boolean isRandom) {
+
         inputNodes.stream().forEach(node -> {
             populateInputNode(isRandom, node);
         });
     }
 
     private void populateInputNode(boolean isRandom, Node inputNode) {
-        if(isRandom) {
+        if(isRandom)
             inputNode.setOutput(r.nextDouble());
-        }
         else {
-            inputNode.setOutput(inputValues.get(passThrough));
+            Map<String, Integer> nodeCoordinates = inputNode.getCoordinates();
+            inputNode.setOutput(inputValues.get(nodeCoordinates.get("y")).get(passThrough));
         }
     }
 
@@ -280,7 +281,7 @@ public class Network {
     }
 
     private void completeEpoch() {
-        while(passThrough < inputValues.size()) {
+        while(passThrough < outputValues.size()) {
             populateInputNodes(false);
             executeFunctionNodes();
             executeOutputNodes();
@@ -359,9 +360,16 @@ public class Network {
 
     public void testNetworkPerformances() {
         completeEpoch();
-        System.out.println("\tINPUT\tGA-OUTPUT\tREAL-OUTPUT\tDIFFERENCE");
-        for(int i = 0; i < inputValues.size(); i++) {
-            System.out.format("%7.3f\t\t%7.3f\t\t%7.3f\t\t%7.3f\n", inputValues.get(i), calculatedOutputs.get(i), outputValues.get(i), Math.abs(outputValues.get(i) - calculatedOutputs.get(i)));
+//        System.out.println("\tINPUT\tGA-OUTPUT\tREAL-OUTPUT\tDIFFERENCE");
+//        for(int i = 0; i < inputValues.get(0).size(); i++) {
+//            System.out.format("%7.3f\t\t%7.3f\t\t%7.3f\t\t%7.3f\n", inputValues.get(0).get(i), calculatedOutputs.get(i), outputValues.get(i), Math.abs(outputValues.get(i) - calculatedOutputs.get(i)));
+//        }
+        System.out.println("\n\nFORMAT FOR LOADING IN GRAPHER");
+        for(int i = 0; i < inputValues.get(0).size(); i++) {
+            for(List<Double> dimension: inputValues) {
+                System.out.format("%7.3f\t", dimension.get(i));
+            }
+            System.out.format("%7.3f\n", calculatedOutputs.get(i));
         }
     }
 

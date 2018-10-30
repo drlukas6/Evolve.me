@@ -29,7 +29,7 @@ public class Organism {
     public Organism(int numberOfNetworks, int numberOfRows,
                     int numberOfColumns, int levelsBack,
                     int numberOfInputs, int numberOfOutputs,
-                    List<Double> inputValues, List<Double> outputValues,
+                    List<List<Double>> inputValues, List<Double> outputValues,
                     int maxGeneration) {
         this.numberOfNetworks = numberOfNetworks;
         this.numberOfRows = numberOfRows;

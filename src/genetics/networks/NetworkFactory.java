@@ -15,14 +15,14 @@ public class NetworkFactory {
     private  List<OutputNode> outputNodes = new ArrayList<>();
 
     private  List<Double> outputValues;
-    private  List<Double> inputValues;
+    private  List<List<Double>> inputValues;
     private int numberOfRows;
     private int numberOfColumns;
     private int numberOfInputs;
     private int numberOfOutputs;
     private int levelsBack;
 
-    public NetworkFactory(List<Double> outputValues, List<Double> inputValues, int numberOfRows, int numberOfColumns, int numberOfInputs, int numberOfOutputs, int levelsBack) {
+    public NetworkFactory(List<Double> outputValues, List<List<Double>> inputValues, int numberOfRows, int numberOfColumns, int numberOfInputs, int numberOfOutputs, int levelsBack) {
         this.outputValues = outputValues;
         this.inputValues = inputValues;
         this.numberOfRows = numberOfRows;
