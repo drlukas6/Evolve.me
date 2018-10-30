@@ -19,19 +19,21 @@ public class InputGenerator {
         while(input1 <= rangeEnd) {
             input2 = rangeStart;
             while(input2 <= rangeEnd) {
-                double output = input1 * input2 + Math.sin((input1 + 1) * (input2 - 1));
+                double output = (Math.pow(input1, 3) / 5 + Math.pow(input2, 3) / 2 - input1 - input2);
                 outputs.get(0).add(output);
                 input2 += step;
             }
             input1 += step;
         }
         input1 = rangeStart;
-        input2 = rangeStart;
-        while (input1 <= rangeEnd) {
-            inputs.get(0).add(input1);
-            inputs.get(1).add(input2);
+        while(input1 <= rangeEnd) {
+            input2 = rangeStart;
+            while(input2 <= rangeEnd) {
+                inputs.get(0).add(input1);
+                inputs.get(1).add(input2);
+                input2 += step;
+            }
             input1 += step;
-            input2 += step;
         }
 
 

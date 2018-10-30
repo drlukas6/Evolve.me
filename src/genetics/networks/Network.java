@@ -360,10 +360,10 @@ public class Network {
 
     public void testNetworkPerformances() {
         completeEpoch();
-//        System.out.println("\tINPUT\tGA-OUTPUT\tREAL-OUTPUT\tDIFFERENCE");
-//        for(int i = 0; i < inputValues.get(0).size(); i++) {
-//            System.out.format("%7.3f\t\t%7.3f\t\t%7.3f\t\t%7.3f\n", inputValues.get(0).get(i), calculatedOutputs.get(i), outputValues.get(i), Math.abs(outputValues.get(i) - calculatedOutputs.get(i)));
-//        }
+        System.out.println("GA-OUTPUT\tREAL-OUTPUT\tDIFFERENCE");
+        for(int i = 0; i < inputValues.get(0).size(); i++) {
+            System.out.format("%7.3f\t\t%7.3f\t\t%7.3f\n", calculatedOutputs.get(i), outputValues.get(i), Math.abs(outputValues.get(i) - calculatedOutputs.get(i)));
+        }
         System.out.println("\n\nFORMAT FOR LOADING IN GRAPHER");
         for(int i = 0; i < inputValues.get(0).size(); i++) {
             for(List<Double> dimension: inputValues) {

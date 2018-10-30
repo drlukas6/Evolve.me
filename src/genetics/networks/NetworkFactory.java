@@ -76,6 +76,7 @@ public class NetworkFactory {
     public Network combineNetworks(Network lhs, Network rhs) {
         String networkDescriptorLhs = lhs.getNetworkDescriptor();
         String[] lhsNetworkParts = networkDescriptorLhs.split("-");
+        String lhsInputs = lhsNetworkParts[0];
         String[] lhsFunctions = lhsNetworkParts[1].split(";");
         String[] lhsOutputs = lhsNetworkParts[2].split(";");
         String networkDescriptorRhs = rhs.getNetworkDescriptor();
@@ -83,9 +84,9 @@ public class NetworkFactory {
         String[] rhsFunctions = rhsNetworkParts[1].split(";");
         String[] rhsOutputs = rhsNetworkParts[2].split(";");
 
-        int splitter = lhsFunctions.length / 2;
+        int splitter =lhsFunctions.length / 2;
 
-        String descriptor = lhsFunctions[0] + "-";
+        String descriptor = lhsInputs + "-";
 
         for(int i = 0; i < splitter; i++) {
             descriptor += lhsFunctions[i] + ";";
