@@ -1,8 +1,8 @@
 package genetics.operations;
 
 public abstract class Operation {
-    protected int operationId;
-    protected int operationArity;
+    private int operationId;
+    private int operationArity;
 
     public Operation(int operationId, int operationArity) {
         this.operationId = operationId;

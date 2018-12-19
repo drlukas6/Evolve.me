@@ -1,7 +1,6 @@
 package genetics.nodes;
 
-import genetics.nodes.Node;
-import genetics.nodes.NodeType;
+import constants.ConstCoordinates;
 import genetics.operations.*;
 
 import java.util.*;
@@ -13,13 +12,11 @@ public class FunctionNode extends Node {
 
     public FunctionNode(NodeType nodeType, double output, Map<String, Integer> coordinates, String nodeId) {
         super(nodeType, output, coordinates, nodeId);
-        Random r = new Random();
         this.operation = OperationFactory.getRandomOperation();
     }
 
     public FunctionNode(Map<String, Integer> coordinates) {
         super(NodeType.FUNCTION, 0.0, coordinates, "f");
-        Random r = new Random();
         this.operation = OperationFactory.getRandomOperation();
     }
 
@@ -67,6 +64,6 @@ public class FunctionNode extends Node {
 
     @Override
     public String toString() {
-        return nodeId + operation.getOperationId() + "(" + coordinates.get("x") + ", " + coordinates.get("y") + ")";
+        return nodeId + operation.getOperationId() + "(" + coordinates.get(ConstCoordinates.x) + ", " + coordinates.get(ConstCoordinates.y) + ")";
     }
 }

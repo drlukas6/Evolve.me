@@ -3,9 +3,6 @@ package genetics.networks;
 import genetics.nodes.*;
 import genetics.operations.*;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class Network {
@@ -24,16 +21,7 @@ public class Network {
     private int passThrough = 0;
     private double fitness = 999.9;
     private List<Double> calculatedOutputs = new ArrayList<>();
-    private String networkDescriptor = new String();
-
-    public Network(int numberOfRows, int numberOfColumns, int numberOfInputs,
-                   int numberOfOutputs, int levelsBack) {
-        this.numberOfRows = numberOfRows;
-        this.numberOfColumns = numberOfColumns;
-        this.numberOfInputs = numberOfInputs;
-        this.numberOfOutputs = numberOfOutputs;
-        this.levelsBack = levelsBack;
-    }
+    private String networkDescriptor = "";
 
     public Network(int numberOfRows, int numberOfColumns, int numberOfInputs,
                    int numberOfOutputs, int levelsBack,
@@ -80,15 +68,11 @@ public class Network {
             InputNode node = new InputNode(NodeType.INPUT, 0.0, coordinates, "i");
             inputNodes.add(node);
         }
-//        System.out.println("========================\tGenerated " + inputNodes.size() + " Input nodes\t\t========================");
-//        System.out.println(inputNodes);
     }
 
     private void populateInputNodes(boolean isRandom) {
 
-        inputNodes.stream().forEach(node -> {
-            populateInputNode(isRandom, node);
-        });
+        inputNodes.stream().forEach(node -> populateInputNode(isRandom, node));
     }
 
     private void populateInputNode(boolean isRandom, Node inputNode) {
@@ -101,19 +85,15 @@ public class Network {
     }
 
     private void generateRandomFunctionNodes() {
-        int numberOfNodes = 0;
         for (int i = 0; i < numberOfColumns; i++) {
             functionNodes.add(new ArrayList<>());
             for (int j = 0; j < numberOfRows; j++) {
-                numberOfNodes++;
                 Map<String, Integer> coordinates = new HashMap<>();
                 coordinates.put("x", i);
                 coordinates.put("y", j);
                 functionNodes.get(i).add(new FunctionNode(NodeType.FUNCTION, 0.0, coordinates, "f"));
             }
         }
-//        System.out.println("========================\tGenerated " + numberOfNodes + " Function nodes\t========================");
-//        System.out.println(functionNodes);
     }
 
     private void generateRandomOutputNodes() {
@@ -123,30 +103,24 @@ public class Network {
             coordinates.put("y", i);
             outputNodes.add(new OutputNode(NodeType.OUTPUT, 0.0, coordinates, "o"));
         }
-//        System.out.println("========================\tGenerated " + outputNodes.size() + " Output nodes\t========================");
-//        System.out.println(outputNodes);
     }
 
 
     private void randomConnectFunctionNodes() {
-//        System.out.println("========================\tConnecting function nodes\t========================");
         for(List<FunctionNode> col: functionNodes) {
             for(FunctionNode node: col) {
                 mutateFunctionNodeInputs(node, false);
-//                System.out.println("Connected node " + node + " to node(s): " + node.getInputs());
             }
         }
     }
 
     private void randomConnectOutputNodes() {
-//        System.out.println("========================\tConnecting Output nodes\t\t========================");
         for (OutputNode node: outputNodes) {
             int randomRow;
             int randomCol;
             randomRow = r.nextInt(numberOfRows);
             randomCol = r.nextInt(numberOfColumns);
             node.setInput(functionNodes.get(randomCol).get(randomRow));
-//            System.out.println("Connected output node at " + node + " to node: " + node.getInput());
         }
     }
 
@@ -165,7 +139,6 @@ public class Network {
     }
 
     public void checkActiveNodes() {
-//        System.out.println("========================\tMarking selected nodes\t\t========================");
         for(List<FunctionNode> nodeCol: functionNodes) {
             for(FunctionNode node: nodeCol) {
                 node.setActive(false);
@@ -184,8 +157,7 @@ public class Network {
     }
 
     private void singlePointMutation() {
-//        System.out.println("========================\tSingle point mutation\t\t========================");
-        boolean isChangedActive = false;
+        boolean isChangedActive;
         do {
             if(r.nextInt((numberOfColumns * numberOfRows + numberOfOutputs) + 1) > numberOfRows*numberOfColumns) {
                 isChangedActive = mutateRandomOutputNode();
@@ -194,7 +166,6 @@ public class Network {
                 isChangedActive = mutateRandomFunctionNode();
             }
         } while(!isChangedActive);
-//        System.out.println("Single point mutation completed");
     }
 
     private boolean mutateRandomFunctionNode() {
@@ -230,9 +201,6 @@ public class Network {
                 node.getInputs().add(foundNode);
             }
         } while(node.getInputs().size() < node.getOperation().getOperationArity());
-        if(shouldOutput) {
-//            System.out.println("Changing Function node " + node + "; NEW CONNECTION(S): " + node.getInputs());
-        }
         return node.isActive();
     }
 
@@ -247,7 +215,6 @@ public class Network {
                 foundTargetArity = true;
             }
         } while (!foundTargetArity);
-//        System.out.println("Changing Function node " + node + "; NEW OPERATION: " + node.getOperation().getOperationId());
         return node.isActive();
     }
 
@@ -257,7 +224,6 @@ public class Network {
         int randomRow = r.nextInt(numberOfRows);
         OutputNode node = outputNodes.get(randomOutputNode);
         node.setInput(functionNodes.get(randomColumn).get(randomRow));
-//        System.out.println("Changing output node " + node + "; NEW CONNECTION: " + node.getInput());
         return node.isActive();
     }
 
@@ -275,9 +241,6 @@ public class Network {
             sum += Math.pow((outputValues.get(i) - calculatedOutputs.get(i)), 2);
         }
         fitness =  Math.sqrt(sum / (outputValues.size() - 2));
-        System.out.println("");
-//        System.out.println("========================\tFitness calculation\t\t\t========================");
-//        System.out.println("FITNESS: " + fitness);
     }
 
     private void completeEpoch() {
@@ -305,23 +268,23 @@ public class Network {
         singlePointMutation();
     }
 
-    public void generateNetworkDescriptor() {
-        String descriptor = new String();
+    private void generateNetworkDescriptor() {
+        StringBuilder descriptor = new StringBuilder();
         for(InputNode node: inputNodes) {
-            descriptor += node + ";";
+            descriptor.append(node).append(";");
         }
-        descriptor += "-";
+        descriptor.append("-");
         for(List<FunctionNode> col: functionNodes) {
             for(FunctionNode node: col) {
-                descriptor += node + node.getInputs().toString() + ";";
+                descriptor.append(node).append(node.getInputs().toString()).append(";");
             }
         }
-        descriptor += "-";
+        descriptor.append("-");
         for(OutputNode node: outputNodes) {
-            descriptor += node + node.getInput().toString() + ";";
+            descriptor.append(node).append(node.getInput().toString()).append(";");
         }
-        descriptor += "-" + numberOfColumns + "-" + numberOfRows + "-" + levelsBack;
-        this.networkDescriptor = descriptor;
+        descriptor.append("-").append(numberOfColumns).append("-").append(numberOfRows).append("-").append(levelsBack);
+        this.networkDescriptor = descriptor.toString();
     }
 
 
@@ -340,7 +303,6 @@ public class Network {
         System.out.println(networkDescriptor);
         System.out.println(fitness);
         System.out.println("------------------------------------------------------");
-
     }
 
     public void mutateNetwork() {
@@ -371,6 +333,10 @@ public class Network {
             }
             System.out.format("%7.3f\n", calculatedOutputs.get(i));
         }
+    }
+
+    public String getStats() {
+        return "NETWORK: \n" + getNetworkDescriptor() + "\nFITNESS:" + fitness + "\n";
     }
 
 

@@ -3,13 +3,13 @@ package genetics.nodes;
 import java.util.Map;
 
 public abstract class Node {
-    protected NodeType nodeType;
-    protected double output;
-    protected Map<String, Integer> coordinates;
-    protected String nodeId;
-    protected boolean active;
+    private NodeType nodeType;
+    double output;
+    Map<String, Integer> coordinates;
+    String nodeId;
+    boolean active;
 
-    public Node(NodeType nodeType, double output, Map<String, Integer> coordinates, String nodeId) {
+    Node(NodeType nodeType, double output, Map<String, Integer> coordinates, String nodeId) {
         this.nodeType = nodeType;
         this.output = output;
         this.coordinates = coordinates;
@@ -40,11 +40,10 @@ public abstract class Node {
 
     @Override
     public boolean equals(Object obj) {
-        Node rhs = (Node) obj;
-        if(rhs == null)
-            return false;
-        if (rhs.coordinates.get("x") == this.coordinates.get("x") && rhs.coordinates.get("y") == this.coordinates.get("y"))
-            return true;
+        if(obj.getClass() == Node.class) {
+            Node rhs = (Node) obj;
+            return (rhs.coordinates.get("x").equals(this.coordinates.get("x")) && rhs.coordinates.get("y").equals(this.coordinates.get("y")));
+        }
         return false;
     }
 

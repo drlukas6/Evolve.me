@@ -69,8 +69,7 @@ public class NetworkFactory {
         parseFunctionNodes(unparsedFunctionNodes);
         parseOutputNodes(unparsedOutputs);
 
-        Network network = new Network(numberOfRows, numberOfColumns, numberOfInputs, numberOfOutputs, levelsBack, inputNodes, functionNodes, outputNodes, inputValues, outputValues);
-        return network;
+        return new Network(numberOfRows, numberOfColumns, numberOfInputs, numberOfOutputs, levelsBack, inputNodes, functionNodes, outputNodes, inputValues, outputValues);
     }
 
     public Network combineNetworks(Network lhs, Network rhs) {
@@ -86,31 +85,27 @@ public class NetworkFactory {
 
         int splitter =lhsFunctions.length / 2;
 
-        String descriptor = lhsInputs + "-";
+        StringBuilder descriptor = new StringBuilder(lhsInputs + "-");
 
         for(int i = 0; i < splitter; i++) {
-            descriptor += lhsFunctions[i] + ";";
+            descriptor.append(lhsFunctions[i]).append(";");
         }
         for(int i = splitter; i < rhsFunctions.length; i++) {
-            descriptor += rhsFunctions[i] + ";";
+            descriptor.append(rhsFunctions[i]).append(";");
         }
 
-        descriptor += "-";
+        descriptor.append("-");
 
         if(lhs.getFitness() < rhs.getFitness()) {
-            for(int i = 0; i < lhsOutputs.length; i++) {
-                descriptor += lhsOutputs[i] + ";";
-            }
+            for (String lhsOutput : lhsOutputs) descriptor.append(lhsOutput).append(";");
         }
         else {
-            for(int i = 0; i < rhsOutputs.length; i++) {
-                descriptor += rhsOutputs[i] + ";";
-            }
+            for (String rhsOutput : rhsOutputs) descriptor.append(rhsOutput).append(";");
         }
 
-        descriptor += "-" + lhsNetworkParts[3] + "-" + lhsNetworkParts[4] + "-" + lhsNetworkParts[5];
+        descriptor.append("-").append(lhsNetworkParts[3]).append("-").append(lhsNetworkParts[4]).append("-").append(lhsNetworkParts[5]);
 
-        return createNetworkWithDescriptor(descriptor);
+        return createNetworkWithDescriptor(descriptor.toString());
     }
 
     private void parseOutputNodes(String[] unparsedOutputNodes) {
@@ -155,7 +150,6 @@ public class NetworkFactory {
         List<Node> nodeInputs = new ArrayList<>();
         String unparsedNodeInputs = nodeDescriptor.substring(nodeDescriptor.indexOf("[") + 1, nodeDescriptor.indexOf("]"));
         int indexOfSeparator = unparsedNodeInputs.indexOf("),");
-//        If the node has only one input
         if(indexOfSeparator == -1){
             Node nodeInput = getNodeWithDescription(unparsedNodeInputs);
             nodeInputs.add(nodeInput);

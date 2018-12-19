@@ -1,10 +1,6 @@
 package genetics.operations;
 
 public class SquareOperation extends Operation {
-    public SquareOperation(int operationId, int operationArity) {
-        super(operationId, operationArity);
-    }
-
     public SquareOperation() {
         super(OperationId.SQUARE.getId(), 1);
     }

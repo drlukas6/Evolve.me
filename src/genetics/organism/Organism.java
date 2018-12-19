@@ -11,33 +11,24 @@ import java.util.Random;
 
 public class Organism {
     private int numberOfNetworks;
-    private int numberOfRows;
-    private int numberOfColumns;
-    private int numberOfInputs;
-    private int numberOfOutputs;
-    private int levelsBack;
     private NetworkFactory networkFactory;
-    private List<Double> inputValues = new ArrayList<>();
-    private List<Double> outputValues = new ArrayList<>();
     private List<Network> networkPopulation = new ArrayList<>();
     private int generation = 0;
     private int maxGeneration;
-    Comparator<Network> fitnessComparator = Comparator.comparing(Network::getFitness);
+    private Comparator<Network> fitnessComparator = Comparator.comparing(Network::getFitness);
     private Network bestOfAllTime;
-    Random r = new Random();
+    private Writer networkWriter;
+    private Random r = new Random();
 
     public Organism(int numberOfNetworks, int numberOfRows,
                     int numberOfColumns, int levelsBack,
                     int numberOfInputs, int numberOfOutputs,
                     List<List<Double>> inputValues, List<Double> outputValues,
-                    int maxGeneration) {
+                    int maxGeneration,
+                    Writer networkWriter) {
         this.numberOfNetworks = numberOfNetworks;
-        this.numberOfRows = numberOfRows;
-        this.numberOfColumns = numberOfColumns;
-        this.numberOfInputs = numberOfInputs;
-        this.numberOfOutputs = numberOfOutputs;
-        this.levelsBack = levelsBack;
         this.maxGeneration = maxGeneration;
+        this.networkWriter = networkWriter;
         this.networkFactory = new NetworkFactory(outputValues, inputValues, numberOfRows, numberOfColumns, numberOfInputs, numberOfOutputs, levelsBack);
     }
 
@@ -84,48 +75,23 @@ public class Organism {
     }
 
 
-    public void startTraining() {
+    public void startTraining() throws IOException{
         generateInitialNetworks();
-        PrintWriter out = null;
-        try {
-            out = new PrintWriter(new OutputStreamWriter(
-                    new BufferedOutputStream(new FileOutputStream("OrganismOutput.txt")), "UTF-8"));
-            out.println("-------------------- GENERATION: " + generation + "--------------------");
-            out.flush();
-            executeInitialNetworks();
+        executeInitialNetworks();
+        sortNetworks();
+        bestOfAllTime = networkPopulation.get(0);
+        while (generation <= maxGeneration) {
+            createNextGeneration();
+            mutateAndExecuteNetworks();
             sortNetworks();
-            bestOfAllTime = networkPopulation.get(0);
-            while (generation < maxGeneration) {
-                createNextGeneration();
-                mutateAndExecuteNetworks();
-                sortNetworks();
-                if(bestOfAllTime.getFitness() > networkPopulation.get(0).getFitness()) {
-                    bestOfAllTime = networkPopulation.get(0);
-                }
-                out.println("-------------------- GENERATION: " + generation + "--------------------");
-                System.out.println("-------------------- GENERATION: " + generation + "--------------------");
-                out.println("BEST NETWORK: ");
-                out.println(networkPopulation.get(0).getFitness());
-                out.println(networkPopulation.get(0).getNetworkDescriptor());
-                out.flush();
+            if(bestOfAllTime.getFitness() > networkPopulation.get(0).getFitness()) {
+                bestOfAllTime = networkPopulation.get(0);
             }
-            out.println("-------------------- MAX GENERATION REACHED --------------------");
-            out.println("-------------------- BEST FITNESS: " + networkPopulation.get(0).getFitness() + "--------------------");
-            out.println(networkPopulation.get(0).getNetworkDescriptor());
-            out.println("-------------------- BEST NETWORK: --------------------");
-            out.println(bestOfAllTime.getNetworkDescriptor());
-            out.println(bestOfAllTime.getFitness());
-            out.flush();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if(out != null) {
-                out.flush();
-                out.close();
-            }
+            System.out.println("-------------------- GENERATION: " + generation + "--------------------");
         }
+        System.out.println("\n\n---------- MAX GENERATION REACHED ----------\nBEST NETWORK:");
+        System.out.println(bestOfAllTime.getStats());
+        networkWriter.write(bestOfAllTime.getNetworkDescriptor());
     }
 
     public void testBestNetwork() {

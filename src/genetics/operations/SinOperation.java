@@ -1,10 +1,6 @@
 package genetics.operations;
 
 public class SinOperation extends Operation {
-    public SinOperation(int operationId, int operationArity) {
-        super(operationId, operationArity);
-    }
-
     public SinOperation() {
         super(OperationId.SIN.getId(), 1);
     }

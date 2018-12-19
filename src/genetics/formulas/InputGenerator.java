@@ -36,11 +36,8 @@ public class InputGenerator {
             input1 += step;
         }
 
-
-
         equationValues.put("input", inputs);
         equationValues.put("output", outputs);
         return equationValues;
     }
 }
-//x · y + sin((x + 1) · (y − 1))
