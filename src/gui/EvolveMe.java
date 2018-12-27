@@ -47,8 +47,18 @@ public class EvolveMe extends Application {
 
     private void setActions() {
         topPane.getTrainButton().setOnAction(e -> {
+            this.centerPane.clearStatusText();
             networkInputInfo = leftPane.getNetworkInfo();
             networkOutputInfo = rightPane.getNetworkInfo();
+            try {
+                int rows = centerPane.getNumberOfRows();
+                int columns = centerPane.getNumberOfColumns();
+                int levelsBack = centerPane.getLevelsBack();
+                int maxGenerations = centerPane.getMaxGenerations();
+                int numberOfNetworks = centerPane.getNumberOfNetworks();
+            } catch (NumberFormatException exception ){
+                this.centerPane.setStatusText("Number Formatting error");
+            }
         });
     }
 

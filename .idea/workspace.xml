@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4cb8977-6627-433e-8a02-15088cdc77e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/gui/networkInfo/NetworkInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/panes/NetworkInfoProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/EvolveMe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/EvolveMe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/panes/LeftPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/panes/LeftPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/panes/RightPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/panes/RightPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/panes/TopPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/panes/TopPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/panes/CenterPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/panes/CenterPane.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,42 +40,67 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="iml" value="1" />
-          <entry key="java" value="154" />
+          <entry key="java" value="157" />
           <entry key="txt" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="154" />
+          <entry key="JAVA" value="157" />
           <entry key="PLAIN_TEXT" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="29" />
-          <entry key="java" value="39232" />
-          <entry key="txt" value="69" />
+          <entry key="java" value="40049" />
+          <entry key="txt" value="115" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="39232" />
-          <entry key="PLAIN_TEXT" value="98" />
+          <entry key="JAVA" value="40049" />
+          <entry key="PLAIN_TEXT" value="144" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/EvolveMe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="21" column="30" lean-forward="true" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+            <state relative-caret-position="240">
+              <caret line="41" column="43" lean-forward="true" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/gui/panes/CenterPane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="460">
+              <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2647#2648#0" expanded="true" />
+                <element signature="e#2666#2667#0" expanded="true" />
+                <element signature="e#2734#2735#0" expanded="true" />
+                <element signature="e#2778#2779#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/genetics/operations/Operation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -198,7 +219,6 @@
         <option value="$PROJECT_DIR$/src/genetics/operations/SinOperation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/SquareOperation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/SubstractOperation.java" />
-        <option value="$PROJECT_DIR$/src/gui/panes/CenterPane.java" />
         <option value="$PROJECT_DIR$/src/gui/panes/BottomPane.java" />
         <option value="$PROJECT_DIR$/src/gui/panes/TopPane.java" />
         <option value="$PROJECT_DIR$/src/gui/networkInfo/InputInfo.java" />
@@ -208,6 +228,7 @@
         <option value="$PROJECT_DIR$/src/gui/panes/LeftPane.java" />
         <option value="$PROJECT_DIR$/src/gui/panes/RightPane.java" />
         <option value="$PROJECT_DIR$/src/gui/EvolveMe.java" />
+        <option value="$PROJECT_DIR$/src/gui/panes/CenterPane.java" />
       </list>
     </option>
   </component>
@@ -298,7 +319,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/lukassestic/Library/Mobile Documents/com~apple~CloudDocs/FER/V. Semestar/Projekt/CGProgramming/networkDescriptor.txt" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545920652358" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545922445349" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -393,7 +414,7 @@
       <workItem from="1544547119437" duration="3000" />
       <workItem from="1545234980672" duration="7430000" />
       <workItem from="1545864531352" duration="3931000" />
-      <workItem from="1545917696878" duration="3025000" />
+      <workItem from="1545917696878" duration="4251000" />
     </task>
     <task id="LOCAL-00001" summary="IntelliJ warning fixes">
       <created>1545240219037</created>
@@ -409,11 +430,18 @@
       <option name="project" value="LOCAL" />
       <updated>1545868587007</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Parsing inputs and outputs from text areas">
+      <created>1545920884572</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1545920884572</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117277000" />
+    <option name="totallyTimeSpent" value="118503000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -428,8 +456,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27857143" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.2387755" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.27857143" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.2867347" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -492,7 +520,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="IntelliJ warning fixes" />
     <MESSAGE value="GUI interface almost done" />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI interface almost done" />
+    <MESSAGE value="Parsing inputs and outputs from text areas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Parsing inputs and outputs from text areas" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
@@ -590,6 +619,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="566">
           <caret line="318" column="36" lean-forward="true" selection-start-line="318" selection-start-column="36" selection-end-line="318" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2628#2629#0" expanded="true" />
+            <element signature="e#2673#2674#0" expanded="true" />
+            <element signature="e#14395#14396#0" expanded="true" />
+            <element signature="e#14442#14443#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -614,13 +650,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/operations/AddOperation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/genetics/operations/CosOperation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -639,13 +668,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/operations/Operation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
@@ -697,23 +719,6 @@
           <caret line="21" selection-start-line="21" selection-end-line="21" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/panes/CenterPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-          <folding>
-            <element signature="e#3265#3266#0" expanded="true" />
-            <element signature="e#3309#3310#0" expanded="true" />
-            <element signature="e#3363#3364#0" expanded="true" />
-            <element signature="e#3410#3411#0" expanded="true" />
-            <element signature="e#3459#3460#0" expanded="true" />
-            <element signature="e#3501#3502#0" expanded="true" />
-            <element signature="e#3554#3555#0" expanded="true" />
-            <element signature="e#3600#3601#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -780,10 +785,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/EvolveMe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="21" column="30" lean-forward="true" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+        <state relative-caret-position="240">
+          <caret line="41" column="43" lean-forward="true" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/genetics/operations/AddOperation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="4" column="43" lean-forward="true" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/genetics/operations/Operation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/panes/CenterPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2647#2648#0" expanded="true" />
+            <element signature="e#2666#2667#0" expanded="true" />
+            <element signature="e#2734#2735#0" expanded="true" />
+            <element signature="e#2778#2779#0" expanded="true" />
           </folding>
         </state>
       </provider>
