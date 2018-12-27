@@ -22,10 +22,12 @@ public class Network {
     private double fitness = 999.9;
     private List<Double> calculatedOutputs = new ArrayList<>();
     private String networkDescriptor = "";
+    private List<Integer> givenOperations;
 
-    public Network(int numberOfRows, int numberOfColumns, int numberOfInputs,
-                   int numberOfOutputs, int levelsBack,
-                   List<Double> outputValues, List<List<Double>> inputValues) {
+    public Network(int numberOfRows, int numberOfColumns,
+                   int numberOfInputs, int numberOfOutputs,
+                   int levelsBack, List<Double> outputValues,
+                   List<List<Double>> inputValues, List<Integer> givenOperations) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.numberOfInputs = numberOfInputs;
@@ -33,13 +35,15 @@ public class Network {
         this.levelsBack = levelsBack;
         this.outputValues = outputValues;
         this.inputValues = inputValues;
+        this.givenOperations = givenOperations;
     }
 
     public Network(int numberOfRows, int numberOfColumns,
                    int numberOfInputs, int numberOfOutputs,
                    int levelsBack, List<InputNode> inputNodes,
                    List<List<FunctionNode>> functionNodes, List<OutputNode> outputNodes,
-                   List<List<Double>> inputValues, List<Double> outputValues) {
+                   List<List<Double>> inputValues, List<Double> outputValues,
+                   List<Integer> givenOperations) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.numberOfInputs = numberOfInputs;
@@ -50,6 +54,7 @@ public class Network {
         this.outputNodes = outputNodes;
         this.inputValues = inputValues;
         this.outputValues = outputValues;
+        this.givenOperations = givenOperations;
     }
 
     public String getNetworkDescriptor() {
@@ -91,7 +96,7 @@ public class Network {
                 Map<String, Integer> coordinates = new HashMap<>();
                 coordinates.put("x", i);
                 coordinates.put("y", j);
-                functionNodes.get(i).add(new FunctionNode(NodeType.FUNCTION, 0.0, coordinates, "f"));
+                functionNodes.get(i).add(new FunctionNode(NodeType.FUNCTION, 0.0, coordinates, "f", givenOperations));
             }
         }
     }
@@ -208,7 +213,7 @@ public class Network {
         int oprationId;
         boolean foundTargetArity = false;
         do {
-            oprationId = r.nextInt(Operation.OPERATION_MAX + 1 - Operation.OPERATION_MIN) + Operation.OPERATION_MIN;
+            oprationId = givenOperations.get(r.nextInt(givenOperations.size()));
             Operation randomOperation = OperationFactory.getOperationWithId(oprationId);
             if(randomOperation.getOperationArity() == node.getOperation().getOperationArity() && randomOperation.getOperationId() != node.getOperation().getOperationId()) {
                 node.setOperation(randomOperation);

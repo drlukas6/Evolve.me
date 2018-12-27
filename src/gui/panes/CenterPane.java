@@ -7,6 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class CenterPane extends BorderPane {
     private VBox operationsStack = new VBox();
     private VBox networkOptionsStack = new VBox();
@@ -77,8 +81,8 @@ public class CenterPane extends BorderPane {
         this.statusLabel.setText("");
     }
 
-    public CheckBox[] getAllCheckboxes() {
-        CheckBox[] checkBoxes = {addOperation,
+    private CheckBox[] getAllCheckboxes() {
+        return new CheckBox[]{addOperation,
                                 substractOperation,
                                 divideOperation,
                                 multiplyOperation,
@@ -87,15 +91,18 @@ public class CenterPane extends BorderPane {
                                 squareOperation,
                                 log10Operation,
                                 negativeOperation};
-
-        return checkBoxes;
     }
 
-    public Boolean areNoOperationsSelected() {
-        for(CheckBox checkBox: getAllCheckboxes()) {
-            if (checkBox.isSelected()) return false;
+    public List<Integer> getCheckedOperations() {
+        List<Integer> checked = new ArrayList<>();
+        CheckBox[] checkBoxes = getAllCheckboxes();
+        for(int i = 0; i < checkBoxes.length; i++) {
+            if(checkBoxes[i].isSelected()) checked.add(i);
         }
-        return true;
+        if(checked.size() == 0)
+            checked.addAll(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8));
+
+        return checked;
     }
 
     public int getNumberOfRows() throws NumberFormatException {

@@ -9,15 +9,16 @@ public class FunctionNode extends Node {
     private List<Node> inputs = new ArrayList<>();
     private Operation operation;
     private boolean active;
+    Random r = new Random();
 
-    public FunctionNode(NodeType nodeType, double output, Map<String, Integer> coordinates, String nodeId) {
+    public FunctionNode(NodeType nodeType, double output, Map<String, Integer> coordinates, String nodeId, List<Integer> givenOperations) {
         super(nodeType, output, coordinates, nodeId);
-        this.operation = OperationFactory.getRandomOperation();
+        this.operation = OperationFactory.getOperationWithId(givenOperations.get(r.nextInt(givenOperations.size())));
     }
 
-    public FunctionNode(Map<String, Integer> coordinates) {
+    public FunctionNode(Map<String, Integer> coordinates, List<Integer> givenOperations) {
         super(NodeType.FUNCTION, 0.0, coordinates, "f");
-        this.operation = OperationFactory.getRandomOperation();
+        this.operation = OperationFactory.getOperationWithId(givenOperations.get(r.nextInt(givenOperations.size())));
     }
 
 

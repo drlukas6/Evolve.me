@@ -4,10 +4,7 @@ import genetics.networks.Network;
 import genetics.networks.NetworkFactory;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Organism {
     private int numberOfNetworks;
@@ -17,19 +14,25 @@ public class Organism {
     private int maxGeneration;
     private Comparator<Network> fitnessComparator = Comparator.comparing(Network::getFitness);
     private Network bestOfAllTime;
+    private List<Integer> givenOperations;
     private Writer networkWriter;
     private Random r = new Random();
+    private Map<Integer, Double> fitnessProgressData = new HashMap<>();
 
     public Organism(int numberOfNetworks, int numberOfRows,
                     int numberOfColumns, int levelsBack,
                     int numberOfInputs, int numberOfOutputs,
                     List<List<Double>> inputValues, List<Double> outputValues,
-                    int maxGeneration,
-                    Writer networkWriter) {
+                    int maxGeneration, Writer networkWriter,
+                    List<Integer> givenOperations) {
         this.numberOfNetworks = numberOfNetworks;
         this.maxGeneration = maxGeneration;
         this.networkWriter = networkWriter;
-        this.networkFactory = new NetworkFactory(outputValues, inputValues, numberOfRows, numberOfColumns, numberOfInputs, numberOfOutputs, levelsBack);
+        this.givenOperations = givenOperations;
+        this.networkFactory = new NetworkFactory(outputValues, inputValues,
+                numberOfRows, numberOfColumns,
+                numberOfInputs, numberOfOutputs,
+                levelsBack, givenOperations);
     }
 
 
@@ -74,8 +77,32 @@ public class Organism {
         }
     }
 
+    public void performInitialExecution() {
+        generateInitialNetworks();
+        executeInitialNetworks();
+        sortNetworks();
+        bestOfAllTime = networkPopulation.get(0);
+        fitnessProgressData.put(generation, bestOfAllTime.getFitness());
+    }
 
-    public void startTraining() throws IOException{
+    public void completeGeneration() {
+        if(generation == maxGeneration)
+            return;
+        createNextGeneration();
+        mutateAndExecuteNetworks();
+        sortNetworks();
+        if(bestOfAllTime.getFitness() > networkPopulation.get(0).getFitness())
+            bestOfAllTime = networkPopulation.get(0);
+        System.out.println("-------------------- GENERATION: " + generation + "--------------------");
+        fitnessProgressData.put(generation, bestOfAllTime.getFitness());
+        if(generation == maxGeneration) {
+            System.out.println("\n\n---------- MAX GENERATION REACHED ----------\nBEST NETWORK:");
+            System.out.println(bestOfAllTime.getStats());
+        }
+    }
+
+
+    public void startTraining() throws IOException {
         generateInitialNetworks();
         executeInitialNetworks();
         sortNetworks();
@@ -92,6 +119,18 @@ public class Organism {
         System.out.println("\n\n---------- MAX GENERATION REACHED ----------\nBEST NETWORK:");
         System.out.println(bestOfAllTime.getStats());
         networkWriter.write(bestOfAllTime.getNetworkDescriptor());
+    }
+
+    public int getGeneration() {
+        return generation;
+    }
+
+    public int getMaxGeneration() {
+        return maxGeneration;
+    }
+
+    public Map<Integer, Double> getFitnessProgressData() {
+        return fitnessProgressData;
     }
 
     public void testBestNetwork() {

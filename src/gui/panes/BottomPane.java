@@ -20,4 +20,8 @@ public class BottomPane extends BorderPane {
     public void setProgress(Double progress) {
         this.trainingProgress.setProgress(progress);
     }
+
+    public void updateProgressBy(Double progress) {
+        this.trainingProgress.setProgress(this.trainingProgress.getProgress() + progress);
+    }
 }

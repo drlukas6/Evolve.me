@@ -21,8 +21,12 @@ public class NetworkFactory {
     private int numberOfInputs;
     private int numberOfOutputs;
     private int levelsBack;
+    private List<Integer> givenOperations;
 
-    public NetworkFactory(List<Double> outputValues, List<List<Double>> inputValues, int numberOfRows, int numberOfColumns, int numberOfInputs, int numberOfOutputs, int levelsBack) {
+    public NetworkFactory(List<Double> outputValues, List<List<Double>> inputValues,
+                          int numberOfRows, int numberOfColumns,
+                          int numberOfInputs, int numberOfOutputs,
+                          int levelsBack, List<Integer> givenOperations) {
         this.outputValues = outputValues;
         this.inputValues = inputValues;
         this.numberOfRows = numberOfRows;
@@ -30,10 +34,11 @@ public class NetworkFactory {
         this.numberOfInputs = numberOfInputs;
         this.numberOfOutputs = numberOfOutputs;
         this.levelsBack = levelsBack;
+        this.givenOperations = givenOperations;
     }
 
     public Network createRandomNetwork() {
-        return new Network(numberOfRows, numberOfColumns, numberOfInputs, numberOfOutputs, levelsBack, outputValues, inputValues);
+        return new Network(numberOfRows, numberOfColumns, numberOfInputs, numberOfOutputs, levelsBack, outputValues, inputValues, givenOperations);
     }
 
     public Network createNetworkWithDescriptor(String networkDescriptor) {
@@ -69,7 +74,11 @@ public class NetworkFactory {
         parseFunctionNodes(unparsedFunctionNodes);
         parseOutputNodes(unparsedOutputs);
 
-        return new Network(numberOfRows, numberOfColumns, numberOfInputs, numberOfOutputs, levelsBack, inputNodes, functionNodes, outputNodes, inputValues, outputValues);
+        return new Network(numberOfRows, numberOfColumns,
+                numberOfInputs, numberOfOutputs,
+                levelsBack, inputNodes,
+                functionNodes, outputNodes,
+                inputValues, outputValues, givenOperations);
     }
 
     public Network combineNetworks(Network lhs, Network rhs) {
@@ -125,7 +134,7 @@ public class NetworkFactory {
             Operation nodeOperation = getNodeOperation(unparsedFunctionNode);
             Map<String, Integer> coordinates = getNodeCoordinates(shortNodeDescriptor);
             List<Node> nodeInputs = getNodeInputs(unparsedFunctionNode);
-            FunctionNode node = new FunctionNode(coordinates);
+            FunctionNode node = new FunctionNode(coordinates, givenOperations);
             node.setOperation(nodeOperation);
             node.setInputs(nodeInputs);
             functionNodes.get(coordinates.get("x")).add(node);
