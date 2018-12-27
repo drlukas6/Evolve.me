@@ -20,4 +20,8 @@ public class TopPane extends BorderPane {
         this.setLeft(titleLabel);
         this.setRight(trainButton);
     }
+
+    public Button getTrainButton() {
+        return trainButton;
+    }
 }
