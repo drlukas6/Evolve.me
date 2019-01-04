@@ -1,16 +1,18 @@
 package genetics.operations;
 
+import java.util.List;
 import java.util.Random;
 
 public class OperationFactory {
     private static Random r = new Random();
 
-    public static Operation getRandomOperation() {
-        return operationWithId(r.nextInt(Operation.OPERATION_MAX + 1));
-    }
-
     public static Operation getOperationWithId(int id) {
         return operationWithId(id);
+    }
+
+    public static Operation getRandomOperationFromGiven(List<Integer> givenOperations) {
+        int operationId = givenOperations.get(r.nextInt(givenOperations.size()));
+        return getOperationWithId(operationId);
     }
 
     private static Operation operationWithId(int id) {

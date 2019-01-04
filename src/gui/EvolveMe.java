@@ -77,7 +77,7 @@ public class EvolveMe extends Application {
                         new OutputStreamWriter(
                                 new FileOutputStream(String.format("Organisms/organism-%s.cgp", organismId)), StandardCharsets.UTF_8)
                 );
-                Organism organism = new Organism(numberOfNetworks, rows, columns,
+                this.organism = new Organism(numberOfNetworks, rows, columns,
                         levelsBack, networkInputInfo.getDimension(), networkOutputInfo.getDimension(),
                         networkInputInfo.getValues(), networkOutputInfo.getValues().get(0), maxGenerations,
                         writer, centerPane.getCheckedOperations());
@@ -86,17 +86,13 @@ public class EvolveMe extends Application {
                     protected Task<Void> createTask() {
                         return new Task<Void>() {
                             @Override
-                            protected Void call() throws InterruptedException {
+                            protected Void call() {
                                 organism.performInitialExecution();
                                 while (organism.getGeneration() < organism.getMaxGeneration()) {
                                     organism.completeGeneration();
-                                    Platform.runLater(() -> {
-                                        bottomPane.updateProgressBy(1./organism.getMaxGeneration());
-                                    });
+                                    Platform.runLater(() -> bottomPane.updateProgressBy(1./organism.getMaxGeneration()));
                                 }
-                                Platform.runLater(() -> {
-                                    showGraph(organism.getFitnessProgressData());
-                                });
+                                Platform.runLater(() -> showGraph(organism.getFitnessProgressData()));
                                 return null;
                             }
                         };
@@ -110,9 +106,7 @@ public class EvolveMe extends Application {
                 this.centerPane.setStatusText("File not found error");
             } catch (IllegalStateException exception) {
                 this.centerPane.setStatusText("Network info error");
-            } /*catch (InterruptedException e1) {
-                e1.printStackTrace();
-            }*/
+            }
         });
     }
 

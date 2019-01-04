@@ -1,8 +1,5 @@
 package genetics.nodes;
 
-import genetics.nodes.Node;
-import genetics.nodes.NodeType;
-
 import java.util.*;
 
 public class OutputNode extends Node {

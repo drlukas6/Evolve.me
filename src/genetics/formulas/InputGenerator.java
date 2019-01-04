@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Un-necessary class primarily used for generating input and output numbers
+ */
 public class InputGenerator {
     public static Map<String, List<List<Double>>> inputData(double step, int rangeStart, int rangeEnd, int functionDimension) {
         List<List<Double>> inputs = new ArrayList<>();

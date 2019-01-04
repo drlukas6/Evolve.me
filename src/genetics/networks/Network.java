@@ -1,10 +1,14 @@
 package genetics.networks;
 
+import constants.Coordinates;
 import genetics.nodes.*;
 import genetics.operations.*;
 
 import java.util.*;
 
+/**
+ * Network class that defines all variables and methods that make it function
+ */
 public class Network {
     private List<InputNode> inputNodes = new ArrayList<>();
     private List<List<FunctionNode>> functionNodes = new ArrayList<>();
@@ -17,17 +21,29 @@ public class Network {
     private Random r = new Random();
     private List<Double> outputValues;
     private List<List<Double>> inputValues;
-    private int generation = 0;
     private int passThrough = 0;
     private double fitness = 999.9;
     private List<Double> calculatedOutputs = new ArrayList<>();
     private String networkDescriptor = "";
     private List<Integer> givenOperations;
 
-    public Network(int numberOfRows, int numberOfColumns,
-                   int numberOfInputs, int numberOfOutputs,
-                   int levelsBack, List<Double> outputValues,
-                   List<List<Double>> inputValues, List<Integer> givenOperations) {
+
+    /**
+     * Network constructor used by the network factory to create a random network
+     *
+     * @param numberOfRows number of rows of function nodes
+     * @param numberOfColumns number of columns of function nodes
+     * @param numberOfInputs number of inputs
+     * @param numberOfOutputs number of outputs
+     * @param levelsBack levels back
+     * @param outputValues correct output values
+     * @param inputValues input values
+     * @param givenOperations operations that the network is allowed to use
+     */
+    Network(int numberOfRows, int numberOfColumns,
+            int numberOfInputs, int numberOfOutputs,
+            int levelsBack, List<Double> outputValues,
+            List<List<Double>> inputValues, List<Integer> givenOperations) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.numberOfInputs = numberOfInputs;
@@ -38,12 +54,28 @@ public class Network {
         this.givenOperations = givenOperations;
     }
 
-    public Network(int numberOfRows, int numberOfColumns,
-                   int numberOfInputs, int numberOfOutputs,
-                   int levelsBack, List<InputNode> inputNodes,
-                   List<List<FunctionNode>> functionNodes, List<OutputNode> outputNodes,
-                   List<List<Double>> inputValues, List<Double> outputValues,
-                   List<Integer> givenOperations) {
+
+    /**
+     * Network constructor used by the network factory to create a network from existing resources (eg. network descriptor string)
+     *
+     * @param numberOfRows number of rows of function nodes
+     * @param numberOfColumns number of columns of function nodes
+     * @param numberOfInputs number of inputs
+     * @param numberOfOutputs number of outputs
+     * @param levelsBack levels back
+     * @param inputNodes existing input nodes
+     * @param functionNodes existing function nodes
+     * @param outputNodes existing output nodes
+     * @param inputValues input values
+     * @param outputValues correct output values
+     * @param givenOperations operations that the network is allowed to use
+     */
+    Network(int numberOfRows, int numberOfColumns,
+            int numberOfInputs, int numberOfOutputs,
+            int levelsBack, List<InputNode> inputNodes,
+            List<List<FunctionNode>> functionNodes, List<OutputNode> outputNodes,
+            List<List<Double>> inputValues, List<Double> outputValues,
+            List<Integer> givenOperations) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.numberOfInputs = numberOfInputs;
@@ -65,28 +97,34 @@ public class Network {
         return fitness;
     }
 
+
+    /**
+     * Creates empty input nodes
+     */
     private void generateInputNodes() {
         for(int i = 0; i < numberOfInputs; i++) {
             Map<String, Integer> coordinates = new HashMap<>();
-            coordinates.put("x", 0);
-            coordinates.put("y", i);
+            coordinates.put(Coordinates.x, 0);
+            coordinates.put(Coordinates.y, i);
             InputNode node = new InputNode(NodeType.INPUT, 0.0, coordinates, "i");
             inputNodes.add(node);
         }
     }
 
-    private void populateInputNodes(boolean isRandom) {
 
-        inputNodes.stream().forEach(node -> populateInputNode(isRandom, node));
+    private void populateInputNodes() {
+        inputNodes.forEach(this::populateInputNode);
     }
 
-    private void populateInputNode(boolean isRandom, Node inputNode) {
-        if(isRandom)
-            inputNode.setOutput(r.nextDouble());
-        else {
-            Map<String, Integer> nodeCoordinates = inputNode.getCoordinates();
-            inputNode.setOutput(inputValues.get(nodeCoordinates.get("y")).get(passThrough));
-        }
+    /**
+     * Fetches the correct input value corresponding to the nodes positions
+     * and assigns that value to the node
+     *
+     * @param inputNode node to populate with a value
+     */
+    private void populateInputNode(Node inputNode) {
+        Map<String, Integer> nodeCoordinates = inputNode.getCoordinates();
+        inputNode.setOutput(inputValues.get(nodeCoordinates.get("y")).get(passThrough));
     }
 
     private void generateRandomFunctionNodes() {
@@ -94,9 +132,9 @@ public class Network {
             functionNodes.add(new ArrayList<>());
             for (int j = 0; j < numberOfRows; j++) {
                 Map<String, Integer> coordinates = new HashMap<>();
-                coordinates.put("x", i);
-                coordinates.put("y", j);
-                functionNodes.get(i).add(new FunctionNode(NodeType.FUNCTION, 0.0, coordinates, "f", givenOperations));
+                coordinates.put(Coordinates.x, i);
+                coordinates.put(Coordinates.y, j);
+                functionNodes.get(i).add(new FunctionNode(coordinates, givenOperations));
             }
         }
     }
@@ -106,7 +144,7 @@ public class Network {
             Map<String, Integer> coordinates = new HashMap<>();
             coordinates.put("x", 0);
             coordinates.put("y", i);
-            outputNodes.add(new OutputNode(NodeType.OUTPUT, 0.0, coordinates, "o"));
+            outputNodes.add(new OutputNode(coordinates));
         }
     }
 
@@ -114,7 +152,7 @@ public class Network {
     private void randomConnectFunctionNodes() {
         for(List<FunctionNode> col: functionNodes) {
             for(FunctionNode node: col) {
-                mutateFunctionNodeInputs(node, false);
+                mutateFunctionNodeInputs(node);
             }
         }
     }
@@ -129,6 +167,10 @@ public class Network {
         }
     }
 
+    /**
+     * Calls node.execute() for each function node which calculates its output value to be used
+     * in later columns or by output nodes
+     */
     private void executeFunctionNodes() {
         for(List<FunctionNode> col: functionNodes) {
             for(FunctionNode node: col) {
@@ -137,12 +179,20 @@ public class Network {
         }
     }
 
+    /**
+     * Calls node.execute() for each output node which is later used to populate
+     * network calculated output values
+     */
     private void executeOutputNodes() {
         for(OutputNode node: outputNodes) {
             node.execute();
         }
     }
 
+    /**
+     * Sets node.active field for each function node depending if it is used in output calculation
+     * Every node that gets its field changed automatically calls the same method on its parent node to do the same thing
+     */
     public void checkActiveNodes() {
         for(List<FunctionNode> nodeCol: functionNodes) {
             for(FunctionNode node: nodeCol) {
@@ -161,6 +211,9 @@ public class Network {
         System.out.println(sum + " Functional node(s) are active");
     }
 
+    /**
+     * Mutates nodes until it mutates an active node
+     */
     private void singlePointMutation() {
         boolean isChangedActive;
         do {
@@ -177,15 +230,16 @@ public class Network {
         int randomColumn = r.nextInt(numberOfColumns);
         int randomRow = r.nextInt(numberOfRows);
         FunctionNode node = functionNodes.get(randomColumn).get(randomRow);
-        switch (r.nextInt( 1 + 1)) {
+        // [0, 2> => {0, 1}
+        switch (r.nextInt( 2)) {
             case 0:
-                return mutateFunctionNodeInputs(node, true);
+                return mutateFunctionNodeInputs(node);
             default:
                 return mutateFunctionNodeOperation(node);
         }
     }
 
-    private boolean mutateFunctionNodeInputs(FunctionNode node, boolean shouldOutput) {
+    private boolean mutateFunctionNodeInputs(FunctionNode node) {
         int randomRow;
         int randomColumn;
         node.getInputs().clear();
@@ -213,8 +267,7 @@ public class Network {
         int oprationId;
         boolean foundTargetArity = false;
         do {
-            oprationId = givenOperations.get(r.nextInt(givenOperations.size()));
-            Operation randomOperation = OperationFactory.getOperationWithId(oprationId);
+            Operation randomOperation = OperationFactory.getRandomOperationFromGiven(givenOperations);
             if(randomOperation.getOperationArity() == node.getOperation().getOperationArity() && randomOperation.getOperationId() != node.getOperation().getOperationId()) {
                 node.setOperation(randomOperation);
                 foundTargetArity = true;
@@ -232,6 +285,10 @@ public class Network {
         return node.isActive();
     }
 
+    /**
+     * @param node node to check value for
+     * @return min. column node can connect to based on the levels back value
+     */
     private int getMinColumn(Node node) {
         return node.getCoordinates().get("x") - 1 - levelsBack;
     }
@@ -240,6 +297,9 @@ public class Network {
         return node.getCoordinates().get("x") - 1;
     }
 
+    /**
+     * Calculates fitness based on calculated and given output values
+     */
     private void calculateFitness() {
         double sum = 0.0;
         for(int i = 0; i < outputValues.size(); i++) {
@@ -248,9 +308,12 @@ public class Network {
         fitness =  Math.sqrt(sum / (outputValues.size() - 2));
     }
 
+    /**
+     * completes one pass through the network with all input values in order
+     */
     private void completeEpoch() {
         while(passThrough < outputValues.size()) {
-            populateInputNodes(false);
+            populateInputNodes();
             executeFunctionNodes();
             executeOutputNodes();
             calculatedOutputs.add(outputNodes.get(0).getOutput());
@@ -259,20 +322,9 @@ public class Network {
         passThrough = 0;
     }
 
-
-    public void randomInitialSetup() {
-        generateInputNodes();
-        populateInputNodes(true);
-        generateRandomFunctionNodes();
-        generateRandomOutputNodes();
-        randomConnectFunctionNodes();
-        randomConnectOutputNodes();
-        executeFunctionNodes();
-        executeOutputNodes();
-        checkActiveNodes();
-        singlePointMutation();
-    }
-
+    /**
+     * Creates a network descriptor
+     */
     private void generateNetworkDescriptor() {
         StringBuilder descriptor = new StringBuilder();
         for(InputNode node: inputNodes) {
@@ -310,10 +362,15 @@ public class Network {
         System.out.println("------------------------------------------------------");
     }
 
+    // TODO: add new mutations
     public void mutateNetwork() {
         singlePointMutation();
     }
 
+    /**
+     * Combines all methods necessary for a one pass through the network.
+     * Checks active nodes, completes an epoch and calculates fitness and than generates the network descriptor
+     */
     public void executeNetwork() {
         checkActiveNodes();
         completeEpoch();
@@ -325,6 +382,9 @@ public class Network {
         System.out.println("------------------------------------------------------");
     }
 
+    /**
+     * Prints out values compared to the given ones and a format for loading in mac grapher app
+     */
     public void testNetworkPerformances() {
         completeEpoch();
         System.out.println("GA-OUTPUT\tREAL-OUTPUT\tDIFFERENCE");
@@ -343,7 +403,5 @@ public class Network {
     public String getStats() {
         return "NETWORK: \n" + getNetworkDescriptor() + "\nFITNESS:" + fitness + "\n";
     }
-
-
 
 }
