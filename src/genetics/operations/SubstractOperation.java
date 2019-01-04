@@ -2,7 +2,7 @@ package genetics.operations;
 
 public class SubstractOperation extends Operation {
     public SubstractOperation() {
-        super(OperationId.SUBSTRACTION.getId(), 2);
+        super(OperationId.SUBTRACTION.getId(), 2);
     }
 
     @Override

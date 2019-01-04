@@ -14,7 +14,6 @@ public class Organism {
     private int maxGeneration;
     private Comparator<Network> fitnessComparator = Comparator.comparing(Network::getFitness);
     private Network bestOfAllTime;
-    private List<Integer> givenOperations;
     private Writer networkWriter;
     private Random r = new Random();
     private Map<Integer, Double> fitnessProgressData = new HashMap<>();
@@ -28,13 +27,11 @@ public class Organism {
         this.numberOfNetworks = numberOfNetworks;
         this.maxGeneration = maxGeneration;
         this.networkWriter = networkWriter;
-        this.givenOperations = givenOperations;
         this.networkFactory = new NetworkFactory(outputValues, inputValues,
                 numberOfRows, numberOfColumns,
                 numberOfInputs, numberOfOutputs,
                 levelsBack, givenOperations);
     }
-
 
 
     private void generateInitialNetworks() {

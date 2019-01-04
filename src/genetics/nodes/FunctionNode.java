@@ -32,7 +32,7 @@ public class FunctionNode extends Node {
      * Only parent nodes which are not marked active are getting their values changed because if
      * a node already marked it as active it should not change
      *
-     * @param active should node be marked as private or no
+     * @param active should node be marked as active or not
      */
     @Override
     public void setActive(boolean active) {

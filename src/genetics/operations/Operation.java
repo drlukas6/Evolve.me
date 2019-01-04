@@ -25,7 +25,7 @@ public abstract class Operation {
 
     public enum OperationId {
         ADDITION(0),
-        SUBSTRACTION(1),
+        SUBTRACTION(1),
         MULTIPLICATION(2),
         DIVISION(3),
         NEGATIVE(4),

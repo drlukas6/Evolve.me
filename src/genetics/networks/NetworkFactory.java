@@ -9,6 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * BLACK-MAGIC - creates a network from a network descriptor
+ * do not read or be disappointed
+ */
 public class NetworkFactory {
     private  List<InputNode> inputNodes = new ArrayList<>();
     private  List<List<FunctionNode>> functionNodes = new ArrayList<>();
