@@ -1,5 +1,7 @@
 package gui;
 
+import genetics.networks.Network;
+import genetics.nodes.Node;
 import genetics.organism.Organism;
 import gui.networkInfo.NetworkInfo;
 import gui.panes.*;
@@ -7,16 +9,23 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class EvolveMe extends Application {
@@ -92,7 +101,10 @@ public class EvolveMe extends Application {
                                     organism.completeGeneration();
                                     Platform.runLater(() -> bottomPane.updateProgressBy(1./organism.getMaxGeneration()));
                                 }
-                                Platform.runLater(() -> showGraph(organism.getFitnessProgressData()));
+                                Platform.runLater(() -> {
+                                    showGraph(organism.getFitnessProgressData());
+                                    drawBestNetwork(organism.getBestOfAllTime());
+                                });
                                 return null;
                             }
                         };
@@ -135,5 +147,47 @@ public class EvolveMe extends Application {
         graphWindow.setScene(graphScene);
         graphWindow.show();
     }
+
+    private void drawBestNetwork(Network bestOfAllTime) {
+        Stage drawingWindow = new Stage();
+        Group group = new Group();
+        Scene mainScene = new Scene(group, 800, 400);
+
+        Circle circle = new Circle(40, 30, 30, Color.BLUE);
+
+
+        group.getChildren().addAll(getInputCircles(bestOfAllTime.getNumberOfInputs()));
+        group.getChildren().addAll(getFunctionCircles(bestOfAllTime.getNumberOfRows(), bestOfAllTime.getNumberOfColumns()));
+
+        drawingWindow.setScene(mainScene);
+        drawingWindow.show();
+    }
+
+    private List<Circle> getInputCircles(int numberOfInputNodes) {
+        List<Circle> circles = new ArrayList<>();
+        int xCoordinate = 40;
+        int yCoordinate = numberOfInputNodes == 1 ? 200 : 200 - numberOfInputNodes/2;
+
+        for(int i = 0; i < numberOfInputNodes; i++) {
+            Circle circle = new Circle(xCoordinate, yCoordinate + i*70, 30, Color.BLUE);
+            circles.add(circle);
+        }
+        return circles;
+    }
+
+    private List<Circle> getFunctionCircles(int numberOfRows, int numberOfColumns) {
+        List<Circle> circles = new ArrayList<>();
+        int xCoordinate = 120;
+        int yCoordinate = numberOfRows == 1 ? 200 : 200 - numberOfRows/2;
+
+        for(int i = 0; i < numberOfRows; i++) {
+            for(int j = 0; j < numberOfColumns; j++) {
+                Circle circle = new Circle(xCoordinate + i*70, yCoordinate + j*70, 30, Color.RED);
+                circles.add(circle);
+            }
+        }
+        return circles;
+    }
+
 
 }

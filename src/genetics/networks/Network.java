@@ -404,4 +404,19 @@ public class Network {
         return "NETWORK: \n" + getNetworkDescriptor() + "\nFITNESS:" + fitness + "\n";
     }
 
+    public int getNumberOfRows() {
+        return numberOfRows;
+    }
+
+    public int getNumberOfColumns() {
+        return numberOfColumns;
+    }
+
+    public int getNumberOfInputs() {
+        return numberOfInputs;
+    }
+
+    public int getNumberOfOutputs() {
+        return numberOfOutputs;
+    }
 }

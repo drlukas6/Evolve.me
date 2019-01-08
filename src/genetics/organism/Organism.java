@@ -134,5 +134,7 @@ public class Organism {
         bestOfAllTime.testNetworkPerformances();
     }
 
-
+    public Network getBestOfAllTime() {
+        return bestOfAllTime;
+    }
 }
