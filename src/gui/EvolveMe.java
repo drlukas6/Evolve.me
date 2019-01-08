@@ -1,7 +1,11 @@
 package gui;
 
+import constants.Coordinates;
 import genetics.networks.Network;
+import genetics.nodes.FunctionNode;
+import genetics.nodes.InputNode;
 import genetics.nodes.Node;
+import genetics.nodes.OutputNode;
 import genetics.organism.Organism;
 import gui.networkInfo.NetworkInfo;
 import gui.panes.*;
@@ -11,15 +15,14 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -27,8 +30,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class EvolveMe extends Application {
+    private final static Double circleRadius = 25.;
+
 
     private TopPane topPane = new TopPane(600.);
     private LeftPane leftPane = new LeftPane(150.);
@@ -151,42 +157,110 @@ public class EvolveMe extends Application {
     private void drawBestNetwork(Network bestOfAllTime) {
         Stage drawingWindow = new Stage();
         Group group = new Group();
-        Scene mainScene = new Scene(group, 800, 400);
+        Scene mainScene = new Scene(group, 1000, 600);
 
-        Circle circle = new Circle(40, 30, 30, Color.BLUE);
+        List<Circle> inputCircles = getInputCircles(bestOfAllTime);
+        List<Circle> functionCircles = getFunctionCircles(bestOfAllTime);
+        List<Circle> outputCircles = getOutputCircles(bestOfAllTime);
+        List<Line> outputFunctionLines = connectOutputsToFunctions(outputCircles, functionCircles, bestOfAllTime);
+        List<Line> functionLines = connectFunctionNodes(inputCircles, functionCircles, bestOfAllTime);
 
+        group.getChildren().addAll(inputCircles);
+        group.getChildren().addAll(functionCircles);
+        group.getChildren().addAll(outputCircles);
+        group.getChildren().addAll(outputFunctionLines);
+        group.getChildren().addAll(functionLines);
 
-        group.getChildren().addAll(getInputCircles(bestOfAllTime.getNumberOfInputs()));
-        group.getChildren().addAll(getFunctionCircles(bestOfAllTime.getNumberOfRows(), bestOfAllTime.getNumberOfColumns()));
 
         drawingWindow.setScene(mainScene);
         drawingWindow.show();
     }
 
-    private List<Circle> getInputCircles(int numberOfInputNodes) {
+    private List<Circle> getInputCircles(Network bestOfAllTime) {
         List<Circle> circles = new ArrayList<>();
-        int xCoordinate = 40;
-        int yCoordinate = numberOfInputNodes == 1 ? 200 : 200 - numberOfInputNodes/2;
+        double initialXCoordinate = 40;
+        double initialYCoordinate = bestOfAllTime.getNumberOfInputs() == 1 ? 300 : (300 - (bestOfAllTime.getNumberOfInputs() - 1) * 75);
 
-        for(int i = 0; i < numberOfInputNodes; i++) {
-            Circle circle = new Circle(xCoordinate, yCoordinate + i*70, 30, Color.BLUE);
+        for(int i = 0; i < bestOfAllTime.getNumberOfInputs(); i++) {
+            Circle circle = new Circle(initialXCoordinate, initialYCoordinate + i*150, circleRadius, Color.BLUE);
             circles.add(circle);
         }
         return circles;
     }
 
-    private List<Circle> getFunctionCircles(int numberOfRows, int numberOfColumns) {
+    private List<Circle> getFunctionCircles(Network bestOfAllTime) {
         List<Circle> circles = new ArrayList<>();
-        int xCoordinate = 120;
-        int yCoordinate = numberOfRows == 1 ? 200 : 200 - numberOfRows/2;
+        double initialXCoordinate = 180;
+        double initialYCoordinate = bestOfAllTime.getNumberOfRows() == 1 ? 300 : (300 - (bestOfAllTime.getNumberOfRows() - 1) * 37.5);
 
-        for(int i = 0; i < numberOfRows; i++) {
-            for(int j = 0; j < numberOfColumns; j++) {
-                Circle circle = new Circle(xCoordinate + i*70, yCoordinate + j*70, 30, Color.RED);
+
+        for(int i = 0; i < bestOfAllTime.getNumberOfRows(); i++) {
+            for(int j = 0; j < bestOfAllTime.getNumberOfColumns(); j++) {
+                Circle circle = new Circle(initialXCoordinate + i*150, initialYCoordinate + j*75, circleRadius, Color.DARKGRAY);
+                if(bestOfAllTime.getFunctionNodes().get(j).get(i).isActive()) {
+                    circle.setFill(Color.RED);
+                }
                 circles.add(circle);
             }
         }
         return circles;
+    }
+
+    private List<Circle> getOutputCircles(Network bestOfAllTime) {
+        List<Circle> circles = new ArrayList<>();
+        double initialXCoordinate = bestOfAllTime.getNumberOfColumns()*200;
+        double initialYCoordinate = bestOfAllTime.getNumberOfOutputs() == 1 ? 300 : (300 - (bestOfAllTime.getNumberOfOutputs() - 1) * 75);
+
+        for(int i = 0; i < bestOfAllTime.getNumberOfOutputs(); i++) {
+            Circle circle = new Circle(initialXCoordinate, initialYCoordinate + i*150, circleRadius, Color.GREEN);
+            circles.add(circle);
+        }
+        return circles;
+    }
+
+    private List<Line> connectOutputsToFunctions(List<Circle> outputCircles, List<Circle> functionCircles, Network bestOfAllTime) {
+        List<Line> lines = new ArrayList<>();
+        int numberOfColumns = bestOfAllTime.getNumberOfColumns();
+        for(int i = 0; i<outputCircles.size(); i++) {
+            OutputNode observedOutputNode = bestOfAllTime.getOutputNodes().get(i);
+            Map<String, Integer> coordinates = observedOutputNode.getInput().getCoordinates();
+            // broj_retka(krece od 0) * broj_stupaca + broj_stupca(krece od 0)
+            int index = coordinates.get(Coordinates.x) * numberOfColumns + coordinates.get(Coordinates.y);
+            Circle outputCircle = outputCircles.get(i);
+            Circle functionCircle = functionCircles.get(index);
+            lines.add(new Line(outputCircle.getCenterX(), outputCircle.getCenterY(), functionCircle.getCenterX(), functionCircle.getCenterY()));
+        }
+
+        return lines;
+    }
+
+    private List<Line> connectFunctionNodes(List<Circle> inputNodes, List<Circle> functionCircles, Network bestOfAllTime) {
+        List<Line> lines = new ArrayList<>();
+
+        for(int row = 0; row < bestOfAllTime.getNumberOfRows(); row++) {
+            for(int col = 0; col < bestOfAllTime.getNumberOfColumns(); col++) {
+                FunctionNode observedNode = bestOfAllTime.getFunctionNodes().get(col).get(row);
+                Map<String, Integer> observedNodeCoordinates = observedNode.getCoordinates();
+                int observedNodeIndex =  observedNodeCoordinates.get(Coordinates.x) * bestOfAllTime.getNumberOfColumns() + observedNodeCoordinates.get(Coordinates.y);
+                Circle observedNodeCircle = functionCircles.get(observedNodeIndex);
+                for(Node nodesInput: observedNode.getInputs()) {
+                    int index;
+                    Circle circle;
+                    if(nodesInput.getClass() == InputNode.class ) {
+                        index = nodesInput.getCoordinates().get(Coordinates.y);
+                        circle = inputNodes.get(index);
+                    } else {
+                        Map<String, Integer> nodesInputCoordinates = nodesInput.getCoordinates();
+                        index = nodesInputCoordinates.get(Coordinates.x) * bestOfAllTime.getNumberOfColumns() + nodesInputCoordinates.get(Coordinates.y);
+                        circle = functionCircles.get(index);
+                    }
+                    Line line = new Line(observedNodeCircle.getCenterX(), observedNodeCircle.getCenterY(), circle.getCenterX(), circle.getCenterY());
+                    lines.add(line);
+                }
+            }
+        }
+
+        return lines;
     }
 
 

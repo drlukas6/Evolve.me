@@ -95,6 +95,7 @@ public class Organism {
         if(generation == maxGeneration) {
             System.out.println("\n\n---------- MAX GENERATION REACHED ----------\nBEST NETWORK:");
             System.out.println(bestOfAllTime.getStats());
+            System.out.println("BEST ACTIVE NODES COUNT: " + bestOfAllTime.getNumberOfActiveNodes());
         }
     }
 
@@ -115,7 +116,8 @@ public class Organism {
         }
         System.out.println("\n\n---------- MAX GENERATION REACHED ----------\nBEST NETWORK:");
         System.out.println(bestOfAllTime.getStats());
-        networkWriter.write(bestOfAllTime.getNetworkDescriptor());
+        System.out.println("BEST ACTIVE NODES COUNT: " + bestOfAllTime.getNumberOfActiveNodes());
+
     }
 
     public int getGeneration() {

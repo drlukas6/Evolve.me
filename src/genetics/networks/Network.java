@@ -26,6 +26,7 @@ public class Network {
     private List<Double> calculatedOutputs = new ArrayList<>();
     private String networkDescriptor = "";
     private List<Integer> givenOperations;
+    private int numberOfActiveNodes = 0;
 
 
     /**
@@ -208,6 +209,7 @@ public class Network {
                 if(node.isActive()) { sum++; }
             }
         }
+        this.numberOfActiveNodes = sum;
         System.out.println(sum + " Functional node(s) are active");
     }
 
@@ -418,5 +420,21 @@ public class Network {
 
     public int getNumberOfOutputs() {
         return numberOfOutputs;
+    }
+
+    public List<List<FunctionNode>> getFunctionNodes() {
+        return functionNodes;
+    }
+
+    public List<InputNode> getInputNodes() {
+        return inputNodes;
+    }
+
+    public List<OutputNode> getOutputNodes() {
+        return outputNodes;
+    }
+
+    public int getNumberOfActiveNodes() {
+        return numberOfActiveNodes;
     }
 }
