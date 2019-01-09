@@ -4,10 +4,7 @@
     <list default="true" id="e4cb8977-6627-433e-8a02-15088cdc77e4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/networks/Network.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CGProgramming/genetics/networks/Network.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/networks/NetworkFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CGProgramming/genetics/networks/NetworkFactory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CGProgramming/genetics/organism/Organism.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CGProgramming/genetics/organism/Organism.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/genetics/networks/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/networks/Network.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/genetics/organism/Organism.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/genetics/organism/Organism.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/EvolveMe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/EvolveMe.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -27,8 +24,8 @@
     <session id="1033790200">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="27" />
-          <entry key="project.open.time.10" value="2" />
+          <entry key="project.closed" value="28" />
+          <entry key="project.open.time.10" value="3" />
           <entry key="project.open.time.11" value="4" />
           <entry key="project.open.time.12" value="7" />
           <entry key="project.open.time.13" value="4" />
@@ -38,40 +35,90 @@
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="28" />
+          <entry key="project.opened" value="29" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="iml" value="1" />
-          <entry key="java" value="192" />
+          <entry key="java" value="200" />
           <entry key="txt" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="192" />
+          <entry key="JAVA" value="200" />
           <entry key="PLAIN_TEXT" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="29" />
-          <entry key="java" value="47974" />
-          <entry key="txt" value="287" />
+          <entry key="java" value="50986" />
+          <entry key="txt" value="323" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="47974" />
-          <entry key="PLAIN_TEXT" value="316" />
+          <entry key="JAVA" value="50986" />
+          <entry key="PLAIN_TEXT" value="352" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/genetics/networks/Network.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="155">
+              <caret line="197" column="56" lean-forward="true" selection-start-line="197" selection-start-column="56" selection-end-line="197" selection-end-column="56" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#15131#15132#0" expanded="true" />
+                <element signature="e#15164#15165#0" expanded="true" />
+                <element signature="e#15212#15213#0" expanded="true" />
+                <element signature="e#15246#15247#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/genetics/nodes/FunctionNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="765">
+              <caret line="64" column="19" lean-forward="true" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/gui/EvolveMe.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="200" column="64" selection-start-line="200" selection-start-column="64" selection-end-line="200" selection-end-column="64" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/genetics/organism/Organism.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1425">
+              <caret line="101" selection-start-line="101" selection-end-line="101" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -98,6 +145,9 @@
       <find>populateInputNodes</find>
       <find>populateI</find>
       <find>mutateFunctionNodeInputs</find>
+      <find>.get</find>
+      <find>ACTIVE NODES C</find>
+      <find>activ</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,8 +203,8 @@
         <option value="$PROJECT_DIR$/src/genetics/operations/Operation.java" />
         <option value="$PROJECT_DIR$/src/genetics/operations/AddOperation.java" />
         <option value="$PROJECT_DIR$/src/genetics/networks/NetworkFactory.java" />
-        <option value="$PROJECT_DIR$/src/genetics/organism/Organism.java" />
         <option value="$PROJECT_DIR$/src/gui/shapes/NodeCircle.java" />
+        <option value="$PROJECT_DIR$/src/genetics/organism/Organism.java" />
         <option value="$PROJECT_DIR$/src/genetics/networks/Network.java" />
         <option value="$PROJECT_DIR$/src/gui/EvolveMe.java" />
       </list>
@@ -178,7 +228,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -209,6 +258,13 @@
               <item name="CGProgramming" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="genetics" type="462c0819:PsiDirectoryNode" />
+              <item name="nodes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Evolve.me" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CGProgramming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="genetics" type="462c0819:PsiDirectoryNode" />
               <item name="organism" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -217,17 +273,25 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Evolve.me" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CGProgramming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+              <item name="panes" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/lukassestic/Library/Mobile Documents/com~apple~CloudDocs/FER/V. Semestar/Projekt/CGProgramming/networkDescriptor.txt" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546887343736" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546978354104" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -326,7 +390,8 @@
       <workItem from="1546598473960" duration="4920000" />
       <workItem from="1546791629790" duration="188000" />
       <workItem from="1546884091231" duration="3156000" />
-      <workItem from="1546953752108" duration="100000" />
+      <workItem from="1546953752108" duration="8992000" />
+      <workItem from="1547020452509" duration="454000" />
     </task>
     <task id="LOCAL-00001" summary="IntelliJ warning fixes">
       <created>1545240219037</created>
@@ -384,16 +449,31 @@
       <option name="project" value="LOCAL" />
       <updated>1546606666910</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Drawing sketch">
+      <created>1546954068164</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1546954068164</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Drawing the network">
+      <created>1546978345896</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1546978345896</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135123000" />
+    <option name="totallyTimeSpent" value="144524000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1941392" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1965812" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -402,7 +482,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.27857143" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27857143" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.2867347" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -472,7 +552,9 @@
     <MESSAGE value="Fitness progress chart works" />
     <MESSAGE value="Started documentation" />
     <MESSAGE value="functional GUI and touchups" />
-    <option name="LAST_COMMIT_MESSAGE" value="functional GUI and touchups" />
+    <MESSAGE value="Drawing sketch" />
+    <MESSAGE value="Drawing the network" />
+    <option name="LAST_COMMIT_MESSAGE" value="Drawing the network" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
@@ -618,13 +700,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/panes/NetworkInfoProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/panes/LeftPane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -668,13 +743,6 @@
             <element signature="e#882#883#0" expanded="true" />
             <element signature="e#964#965#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/genetics/nodes/FunctionNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-120">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
@@ -740,30 +808,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/shapes/NodeCircle.java" />
-    <entry file="file://$PROJECT_DIR$/src/genetics/networks/Network.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="383" lean-forward="true" selection-start-line="383" selection-end-line="383" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/EvolveMe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="156" lean-forward="true" selection-start-line="156" selection-end-line="156" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3055#3935#0" expanded="true" />
-            <element signature="e#3194#3894#0" expanded="true" />
-            <element signature="e#3893#3894#0" expanded="true" />
-            <element signature="e#3934#3935#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/panes/CenterPane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
@@ -774,13 +818,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/panes/NetworkInfoProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/genetics/organism/Organism.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="835">
-          <caret line="136" column="39" selection-start-line="136" selection-start-column="39" selection-end-line="136" selection-end-column="39" />
+        <state relative-caret-position="1425">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5002#5003#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/genetics/nodes/FunctionNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="64" column="19" lean-forward="true" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/genetics/networks/Network.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="197" column="56" lean-forward="true" selection-start-line="197" selection-start-column="56" selection-end-line="197" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#15131#15132#0" expanded="true" />
+            <element signature="e#15164#15165#0" expanded="true" />
+            <element signature="e#15212#15213#0" expanded="true" />
+            <element signature="e#15246#15247#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/EvolveMe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="200" column="64" selection-start-line="200" selection-start-column="64" selection-end-line="200" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

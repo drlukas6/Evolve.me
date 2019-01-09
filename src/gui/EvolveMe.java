@@ -165,11 +165,12 @@ public class EvolveMe extends Application {
         List<Line> outputFunctionLines = connectOutputsToFunctions(outputCircles, functionCircles, bestOfAllTime);
         List<Line> functionLines = connectFunctionNodes(inputCircles, functionCircles, bestOfAllTime);
 
+        group.getChildren().addAll(outputFunctionLines);
+        group.getChildren().addAll(functionLines);
         group.getChildren().addAll(inputCircles);
         group.getChildren().addAll(functionCircles);
         group.getChildren().addAll(outputCircles);
-        group.getChildren().addAll(outputFunctionLines);
-        group.getChildren().addAll(functionLines);
+
 
 
         drawingWindow.setScene(mainScene);
@@ -197,7 +198,7 @@ public class EvolveMe extends Application {
         for(int i = 0; i < bestOfAllTime.getNumberOfRows(); i++) {
             for(int j = 0; j < bestOfAllTime.getNumberOfColumns(); j++) {
                 Circle circle = new Circle(initialXCoordinate + i*150, initialYCoordinate + j*75, circleRadius, Color.DARKGRAY);
-                if(bestOfAllTime.getFunctionNodes().get(j).get(i).isActive()) {
+                if(bestOfAllTime.getFunctionNodes().get(i).get(j).isActive()) {
                     circle.setFill(Color.RED);
                 }
                 circles.add(circle);
